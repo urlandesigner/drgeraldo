@@ -326,7 +326,7 @@ mkdir -p img && touch img/.gitkeep
 ./verify.sh
 ```
 
-Esperado: todas as checagens de estrutura, metadados, idioma e palavras proibidas passam. **Falha esperada:** "CRM-ES 10212 aparece 0 vezes, esperado no mínimo 2" — o CRM entra na Task 2. Também falha a checagem de `<img>` apenas se houver imagem, o que ainda não há.
+Esperado: todas as checagens de estrutura, metadados, idioma e palavras proibidas passam. **Falha esperada:** "CRM-ES 10212 aparece 1 vezes, esperado no mínimo 2" — a única ocorrência nesta task está na `meta description`; a segunda entra na Task 2 (navegação) e a terceira na Task 8 (rodapé). Também falha a checagem de `<img>` apenas se houver imagem, o que ainda não há.
 
 - [ ] **Step 7: Commit**
 
