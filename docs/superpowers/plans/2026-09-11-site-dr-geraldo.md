@@ -648,13 +648,44 @@ Observações de redação, para quem for ajustar o texto depois:
 }
 ```
 
-- [ ] **Step 4: Rodar a verificação**
+- [ ] **Step 4: Fazer as âncoras pararem abaixo do cabeçalho fixo**
+
+A navegação é `sticky`. Sem compensação, clicar em "Sobre" leva o título da seção para
+**debaixo** da barra — o leitor aterrissa num texto sem título. O valor não pode ser fixo:
+a barra tem 66px no desktop e 124px no mobile, onde a navegação quebra em duas linhas.
+
+Em `styles.css`, acrescentar `--nav-h` ao `:root`, logo após `--secao-y`:
+
+```css
+  --nav-h: 4.75rem;
+```
+
+Logo após a regra `box-sizing`:
+
+```css
+/* O cabeçalho é sticky: âncoras precisam parar abaixo dele, senão o título
+   da seção fica escondido atrás da barra. O valor acompanha --nav-h, que
+   muda no mobile porque a navegação passa a ocupar duas linhas. */
+html { scroll-padding-top: calc(var(--nav-h) + 1.25rem); }
+```
+
+E dentro da media query de 860px que já existe, como primeira declaração:
+
+```css
+  :root { --nav-h: 8.25rem; }
+```
+
+Acrescentar também `role="list"` ao `<ul class="credenciais">`. O `list-style: none` remove a
+semântica de lista em alguns leitores de tela; o atributo devolve, e custa nada.
+
+- [ ] **Step 5: Rodar a verificação**
 
 ```bash
 ./verify.sh
 ```
 
-Esperado: segue falhando só o CRM (1 de 2, falta o rodapé). Nenhuma palavra proibida.
+Esperado: passa inteiro. Conferir em 360px e em 1280px que, ao clicar em cada link do menu,
+o título da seção de destino fica visível abaixo da barra.
 
 - [ ] **Step 5: Confirmar que as pendências estão visíveis**
 
@@ -1297,7 +1328,7 @@ Esperado: "Tudo passou." Se a contagem de pendências vier abaixo de 7, alguma p
 - [ ] **Step 3: Acrescentar respeito a `prefers-reduced-motion` e melhorar o alvo de toque**
 
 ```css
-html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+html { scroll-behavior: smooth; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -1314,7 +1345,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
 }
 ```
 
-O `scroll-padding-top` existe porque a navegação é `sticky`: sem ele, a âncora leva o título para debaixo da barra.
+O `scroll-padding-top` **não** entra aqui: foi antecipado para a Task 4, porque o defeito se manifesta assim que a primeira seção ancorável ganha conteúdo. Ver Task 4, Step 4.
 
 - [ ] **Step 4: Conferir em três larguras**
 
