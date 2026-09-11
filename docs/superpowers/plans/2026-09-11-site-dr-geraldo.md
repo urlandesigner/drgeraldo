@@ -54,6 +54,11 @@ Corpo em `18px`, `line-height 1.7`, medida máxima `68ch`.
 | `img/og-cover.jpg` | Imagem de compartilhamento |
 | `vercel.json` | Configuração mínima de deploy estático |
 
+**Classes sem regra CSS, de propósito.** As classes `.sobre`, `.consulta`, `.trato`,
+`.pacientes`, `.consultorio` e `.hero__texto` aparecem na marcação sem nenhuma regra
+correspondente. São ganchos semânticos para ajuste futuro — o layout funciona sem elas.
+Ninguém esqueceu de escrever esse CSS.
+
 Ordem das seções e seus `id`, na ordem em que aparecem no documento:
 `topo`, `sobre`, `consulta`, `trato`, `pacientes`, `consultorio`, `duvidas`.
 As seções "Abertura", "O incômodo" e "Rodapé" não recebem `id` porque não são alvo de âncora.
