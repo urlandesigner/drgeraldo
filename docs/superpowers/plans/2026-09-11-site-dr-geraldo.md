@@ -30,7 +30,8 @@ Valem para **todas** as tasks. O `verify.sh` checa cada uma.
 
 ```
 --azul-institucional : #1B3F91
---azul-claro         : #31A3DC
+--azul-claro         : #31A3DC   (decorativo: marcadores, bordas)
+--azul-acao          : #1E7EAE   (texto, botão, foco — passa AA com branco)
 --cinza-texto        : #3A4454
 --cinza-fundo        : #F4F7FB
 --borda              : #E2E8F2
@@ -38,6 +39,11 @@ Valem para **todas** as tasks. O `verify.sh` checa cada uma.
 --pendente-fundo     : #FFF4CC
 --pendente-borda     : #E0B400
 ```
+
+**Por que dois azuis.** O `--azul-claro` da fachada do IMI dá apenas 2,84:1 com texto
+branco e reprova no WCAG AA, que é critério de aceite da spec. O `--azul-acao` tem a
+mesma matiz (200°) e saturação (71%), só mais escuro: 4,52:1. Regra: `--azul-claro`
+para decoração, `--azul-acao` para qualquer coisa com texto, botão ou foco.
 
 Títulos: `'Lora', Georgia, serif`. Corpo: `'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`.
 Corpo em `18px`, `line-height 1.7`, medida máxima `68ch`.
@@ -238,6 +244,7 @@ Nota: o `<script type="application/ld+json">` é dado estruturado, não código 
 :root {
   --azul-institucional: #1B3F91;
   --azul-claro: #31A3DC;
+  --azul-acao: #1E7EAE;
   --cinza-texto: #3A4454;
   --cinza-fundo: #F4F7FB;
   --borda: #E2E8F2;
@@ -278,9 +285,9 @@ h3 { font-size: 1.2rem; }
 
 p { margin: 0 0 var(--gap); max-width: var(--medida); }
 
-a { color: var(--azul-claro); }
+a { color: var(--azul-acao); }
 a:focus-visible, button:focus-visible, summary:focus-visible {
-  outline: 3px solid var(--azul-claro);
+  outline: 3px solid var(--azul-acao);
   outline-offset: 3px;
 }
 
@@ -304,7 +311,7 @@ section:nth-of-type(even) { background: var(--cinza-fundo); }
 
 .cta {
   display: inline-block;
-  background: var(--azul-claro);
+  background: var(--azul-acao);
   color: var(--branco);
   font-weight: 600;
   text-decoration: none;
@@ -364,7 +371,7 @@ git commit -m "feat: fundação do site e harness de verificação"
       <a href="#consultorio">Consultório</a>
       <a href="#duvidas">Dúvidas</a>
     </nav>
-    <a class="cta cta--nav" href="https://wa.me/5527000000000" rel="noopener">
+    <a class="cta cta--nav" href="https://wa.me/5527000000000" target="_blank" rel="noopener">
       WhatsApp
     </a>
   </div>
@@ -411,12 +418,14 @@ Nota: `5527000000000` é placeholder da pendência 4. Fica assim até o número 
   white-space: nowrap;
   padding-block: .25rem;
 }
-.nav__links a:hover { color: var(--azul-claro); }
+.nav__links a:hover { color: var(--azul-acao); }
 .cta--nav { padding: .55rem 1.1rem; font-size: .92rem; }
 
 @media (max-width: 860px) {
-  .nav__links { margin-inline-start: 0; order: 3; width: 100%; }
-  .cta--nav { margin-inline-start: auto; }
+  .nav__wrap { flex-wrap: wrap; }
+  .marca { width: 100%; }
+  .nav__links { flex: 1; margin-inline-start: 0; }
+  .cta--nav { flex: none; }
 }
 ```
 
@@ -479,7 +488,7 @@ Inserir logo após `<main>` e antes de `<section id="sobre">`:
         Consulta com foco em obesidade, tireoide e metabolismo, em Vila Velha.
         Atendimento particular, sem hora para acabar.
       </p>
-      <a class="cta" href="https://wa.me/5527000000000" rel="noopener">
+      <a class="cta" href="https://wa.me/5527000000000" target="_blank" rel="noopener">
         Falar com a secretária no WhatsApp
       </a>
       <p class="hero__selo">
@@ -1011,7 +1020,7 @@ Substituir `<section id="consultorio"></section>` por:
         O agendamento é feito pela secretária, por WhatsApp.
       </p>
 
-      <a class="cta" href="https://wa.me/5527000000000" rel="noopener">
+      <a class="cta" href="https://wa.me/5527000000000" target="_blank" rel="noopener">
         Falar com a secretária no WhatsApp
       </a>
     </div>
@@ -1169,7 +1178,7 @@ Substituir `<footer></footer>` por:
     </div>
     <div>
       <p>
-        <a href="https://wa.me/5527000000000" rel="noopener">WhatsApp da secretária</a><br>
+        <a href="https://wa.me/5527000000000" target="_blank" rel="noopener">WhatsApp da secretária</a><br>
         <a href="https://www.doctoralia.com.br/geraldo-andrade-do-norte/generalista/vila-velha"
            rel="noopener">Perfil no Doctoralia</a>
       </p>
