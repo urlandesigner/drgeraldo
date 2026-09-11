@@ -55,8 +55,8 @@ Corpo em `18px`, `line-height 1.7`, medida máxima `68ch`.
 | `index.html` | A página inteira: head com SEO/OG/JSON-LD e as dez seções |
 | `styles.css` | Tokens em `:root`, reset, tipografia, layout, responsivo |
 | `verify.sh` | Harness de verificação dos critérios de aceite |
-| `img/dr-geraldo.jpg` | Retrato — placeholder até a pendência 1 |
-| `img/mapa-consultorio.png` | Mapa estático — placeholder até a pendência 5 |
+| `img/dr-geraldo.svg` | Retrato — placeholder SVG até a pendência 1 (troca para `.jpg` com a foto real) |
+| `img/mapa-consultorio.svg` | Mapa estático — placeholder SVG até a pendência 5 |
 | `img/og-cover.jpg` | Imagem de compartilhamento |
 | `vercel.json` | Configuração mínima de deploy estático |
 
@@ -469,11 +469,9 @@ git commit -m "feat: navegação fixa com wordmark e CRM"
 
 - [ ] **Step 1: Gerar o placeholder da foto**
 
-```bash
-mkdir -p img && printf 'placeholder' > img/dr-geraldo.jpg
-```
-
-O arquivo real substitui esse quando a pendência 1 for resolvida. A dimensão alvo é 800×1000px.
+Um JPEG falso feito com `printf` renderiza como ícone de imagem quebrada — inaceitável no topo
+de uma peça de venda. O placeholder é um SVG válido e visivelmente marcado. A dimensão alvo
+da foto real é 800×1000px; quando a pendência 1 for resolvida, troca-se o arquivo e o `src`.
 
 - [ ] **Step 2: Inserir a abertura e o incômodo**
 
@@ -496,7 +494,7 @@ Inserir logo após `<main>` e antes de `<section id="sobre">`:
            rel="noopener">13 avaliações verificadas no Doctoralia</a>
       </p>
     </div>
-    <img class="hero__foto" src="img/dr-geraldo.jpg"
+    <img class="hero__foto" src="img/dr-geraldo.svg"
          alt="Retrato do Dr. Geraldo Andrade do Norte"
          width="800" height="1000">
   </div>
@@ -553,7 +551,7 @@ Esperado: a checagem de `alt` agora roda e passa. Segue falhando só o CRM (1 de
 - [ ] **Step 5: Commit**
 
 ```bash
-git add index.html styles.css img/dr-geraldo.jpg
+git add index.html styles.css img/dr-geraldo.svg
 git commit -m "feat: abertura e seção de identificação com a dor do paciente"
 ```
 
@@ -987,7 +985,7 @@ Substituir `<section id="pacientes"></section>` por:
 - [ ] **Step 2: Gerar o placeholder do mapa**
 
 ```bash
-printf 'placeholder' > img/mapa-consultorio.png
+# placeholder SVG válido, mesmo padrão da foto (ver Task 3)
 ```
 
 Imagem estática, nunca `iframe` do Google Maps — evita cookie de terceiro (a spec resolve LGPD por arquitetura) e evita o peso de carregamento.
@@ -1026,7 +1024,7 @@ Substituir `<section id="consultorio"></section>` por:
     </div>
 
     <a href="https://maps.google.com/?q=Vila+Velha+ES" rel="noopener">
-      <img src="img/mapa-consultorio.png"
+      <img src="img/mapa-consultorio.svg"
            alt="Mapa da localização do consultório em Vila Velha"
            width="640" height="480">
     </a>
@@ -1085,7 +1083,7 @@ Esperado: duas imagens agora, ambas com `alt` — a checagem passa. Segue falhan
 - [ ] **Step 6: Commit**
 
 ```bash
-git add index.html styles.css img/mapa-consultorio.png
+git add index.html styles.css img/mapa-consultorio.svg
 git commit -m "feat: depoimentos creditados e seção do consultório"
 ```
 
