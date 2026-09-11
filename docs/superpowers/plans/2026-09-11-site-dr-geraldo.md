@@ -31,7 +31,7 @@ Valem para **todas** as tasks. O `verify.sh` checa cada uma.
 ```
 --azul-institucional : #1B3F91
 --azul-claro         : #31A3DC   (decorativo: marcadores, bordas)
---azul-acao          : #1E7EAE   (texto, botão, foco — passa AA com branco)
+--azul-acao          : #1B739F   (texto, botão, foco — passa AA sobre branco E sobre o cinza)
 --cinza-texto        : #3A4454
 --cinza-fundo        : #F4F7FB
 --borda              : #E2E8F2
@@ -42,7 +42,9 @@ Valem para **todas** as tasks. O `verify.sh` checa cada uma.
 
 **Por que dois azuis.** O `--azul-claro` da fachada do IMI dá apenas 2,84:1 com texto
 branco e reprova no WCAG AA, que é critério de aceite da spec. O `--azul-acao` tem a
-mesma matiz (200°) e saturação (71%), só mais escuro: 4,52:1. Regra: `--azul-claro`
+mesma matiz (200°) e saturação (71%), só mais escuro: 5,25:1 sobre branco e 4,89:1 sobre
+o `--cinza-fundo` das seções alternadas — o fundo cinza é o teste mais exigente, porque as
+seções de depoimentos e de dúvidas têm links. Regra: `--azul-claro`
 para decoração, `--azul-acao` para qualquer coisa com texto, botão ou foco.
 
 Títulos: `'Lora', Georgia, serif`. Corpo: `'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`.
@@ -244,7 +246,7 @@ Nota: o `<script type="application/ld+json">` é dado estruturado, não código 
 :root {
   --azul-institucional: #1B3F91;
   --azul-claro: #31A3DC;
-  --azul-acao: #1E7EAE;
+  --azul-acao: #1B739F;
   --cinza-texto: #3A4454;
   --cinza-fundo: #F4F7FB;
   --borda: #E2E8F2;
