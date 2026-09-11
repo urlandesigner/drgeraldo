@@ -97,7 +97,7 @@ else
   falha "existe arquivo .js no projeto"
 fi
 
-scripts=$(grep -o '<script[^>]*>' index.html | grep -v 'application/ld+json' || true)
+scripts=$(tr '\n' ' ' < index.html | grep -o '<script[^>]*>' | grep -v 'application/ld+json' || true)
 if [ -z "$scripts" ]; then
   ok "nenhuma tag <script> fora do JSON-LD"
 else
@@ -138,7 +138,7 @@ for secao in topo sobre consulta trato pacientes consultorio duvidas; do
 done
 
 # --- Imagens com alt ---
-sem_alt=$(grep -o '<img[^>]*>' index.html | grep -v 'alt="[^"]\+"' || true)
+sem_alt=$(tr '\n' ' ' < index.html | grep -o '<img[^>]*>' | grep -v 'alt="[^"]\+"' || true)
 if [ -z "$sem_alt" ]; then
   ok "todas as <img> têm alt preenchido"
 else
