@@ -75,3 +75,46 @@ section:nth-of-type(even) { background: var(--cinza-fundo); }
   border-radius: 6px;
 }
 .cta:hover { background: var(--azul-institucional); }
+
+.nav {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--branco);
+  border-bottom: 1px solid var(--borda);
+  padding-block: .7rem;
+}
+.nav__wrap {
+  display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+}
+.marca { text-decoration: none; line-height: 1.2; }
+.marca strong {
+  display: block;
+  font-family: var(--fonte-titulo);
+  font-size: 1.05rem;
+  color: var(--azul-institucional);
+}
+.marca small {
+  display: block;
+  font-size: .74rem;
+  letter-spacing: .06em;
+  color: var(--cinza-texto);
+}
+.nav__links {
+  display: flex; gap: 1.25rem;
+  margin-inline-start: auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.nav__links a {
+  color: var(--cinza-texto);
+  text-decoration: none;
+  font-size: .95rem;
+  white-space: nowrap;
+  padding-block: .25rem;
+}
+.nav__links a:hover { color: var(--azul-claro); }
+.cta--nav { padding: .55rem 1.1rem; font-size: .92rem; }
+
+@media (max-width: 860px) {
+  .nav__links { margin-inline-start: 0; order: 3; width: 100%; }
+  .cta--nav { margin-inline-start: auto; }
+}
