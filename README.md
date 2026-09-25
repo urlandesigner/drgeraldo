@@ -1,7 +1,8 @@
 # Site Dr. Geraldo Andrade do Norte
 
 Peça de apresentação (v1) para aprovação do projeto pelo cliente.
-Página única, HTML e CSS puros, **zero JavaScript**, sem build e sem dependências.
+Página única, HTML e CSS puros, **zero JavaScript**, sem build, sem dependências e
+sem nenhuma requisição externa — as fontes são servidas de `fonts/`.
 
 - Especificação: `docs/superpowers/specs/2026-09-11-site-dr-geraldo-design.md`
 - Plano: `docs/superpowers/plans/2026-09-11-site-dr-geraldo.md`
@@ -20,7 +21,7 @@ alterações, use um parâmetro novo na URL (`?v=2`) ou force a recarga.
 Checa ausência de JavaScript, palavras proibidas, presença do CRM, seções obrigatórias,
 `alt` nas imagens, metadados, marcadores de pendência e `<h1>` único.
 
-Lighthouse medido em 2026-09-24: **99 / 100 / 100 / 100**
+Lighthouse medido em 2026-09-24: **100 / 100 / 100 / 100**
 (performance, acessibilidade, boas práticas, SEO). O Lighthouse exige URL servida,
 não caminho de arquivo:
 

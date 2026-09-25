@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img" aria-label="Foto pendente">
-  <rect width="800" height="1000" fill="#F4F7FB"/>
-  <rect x="12" y="12" width="776" height="976" fill="none" stroke="#E0B400" stroke-width="6" stroke-dasharray="18 14"/>
-  <text x="400" y="480" text-anchor="middle" font-family="Inter, sans-serif" font-size="46" font-weight="600" fill="#3A4454">FOTO PENDENTE</text>
-  <text x="400" y="540" text-anchor="middle" font-family="Inter, sans-serif" font-size="28" fill="#3A4454">retrato do Dr. Geraldo — 800×1000</text>
+  <rect width="800" height="1000" fill="#EDE6D9"/>
+  <rect x="14" y="14" width="772" height="972" fill="none" stroke="#C99A16" stroke-width="5" stroke-dasharray="20 15"/>
+  <rect x="330" y="404" width="140" height="3" fill="#1B3F91"/>
+  <text x="400" y="492" text-anchor="middle" font-family="Georgia, serif" font-size="44" font-weight="bold" fill="#16223F">FOTO PENDENTE</text>
+  <text x="400" y="540" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="24" fill="#4A5570">retrato do Dr. Geraldo — 800×1000</text>
 </svg>

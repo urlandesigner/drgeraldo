@@ -171,27 +171,36 @@ e não substitui consulta médica."
 
 ## 7. Identidade visual
 
-Paleta derivada da fachada do IMI, com neutros acrescentados:
+**Direção: prontuário editorial.** O site é uma monografia bem composta em papel quente —
+fios de cabelo no lugar de cards, numerais grandes e vazados, muito respiro. O vocabulário
+visual da *leitura*, porque a tese do site é que aqui se explica com calma. Deliberadamente
+o oposto do template de clínica: nada de azul sobre branco, cantos arredondados e sombras.
+
+Paleta derivada do IMI, assentada sobre papel em vez de branco:
 
 ```
---azul-institucional : #1B3F91   títulos, navegação, rodapé
---azul-claro         : #31A3DC   links, CTA, detalhes
---cinza-texto        : #3A4454   texto corrido
---cinza-fundo        : #F4F7FB   fundo de seções alternadas
---borda              : #E2E8F2   linhas e cards
---branco             : #FFFFFF
+--papel:             #F6F2EA   fundo
+--papel-2:           #EDE6D9   seções alternadas
+--tinta:             #16223F   corpo de texto, rodapé, nota honesta
+--tinta-suave:       #4A5570   texto secundário
+--azul:              #1B3F91   IMI — títulos, fios, botão
+--acao:              #175F83   links e foco (AA sobre os dois papéis)
+--papel-sobre-tinta: #D6DAE6   texto claro sobre fundo escuro
+--fio:               #D8CDB8   fio de cabelo, decorativo
+--pendente-bg:       #F2E3B8   marcador de pendência
 ```
 
-**Tipografia — escolha deliberada contra o mercado.** Todos os concorrentes usam sans-serif,
-o que gera um ar clínico, frio e indistinguível entre eles. Aqui: **serif nos títulos (Lora)
-e sans no corpo (Inter)**. Serif carrega autoridade e calor; é tipografia de quem escreve,
-não de quem anuncia. Coerente com um médico cujo diferencial é sentar e explicar.
+**Tipografia: Fraunces + Karla**, ambas hospedadas no próprio domínio. Fraunces é uma
+serifada variável com personalidade, com eixo óptico — não é Inter, Roboto nem Space
+Grotesk. Karla carrega o texto corrido sem a neutralidade genérica das grotescas de
+interface. Corpo em 17px, medida de 64 caracteres.
 
-**O site é feito para ser lido, não escaneado.** Corpo em 18px, linha com cerca de 68
-caracteres, respiro generoso entre blocos. A diagramação comunica "aqui existe tempo".
+**Hospedar as fontes localmente não é detalhe:** servidas pelo Google, bloqueavam a
+renderização por 2,4 s e derrubavam a nota de performance de 99 para 84. Locais, o site
+faz **zero requisições externas**.
 
 **Proibido no projeto:** banco de imagens com jaleco e estetoscópio; ícones decorativos de
-saúde; contadores de números; gradientes coloridos; antes e depois.
+saúde; contadores de números; gradientes coloridos; antes e depois; cards com sombra.
 
 ## 8. Decisões técnicas
 
