@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480" role="img" aria-label="Mapa pendente">
-  <rect width="640" height="480" fill="#EDE6D9"/>
-  <rect x="12" y="12" width="616" height="456" fill="none" stroke="#C99A16" stroke-width="4" stroke-dasharray="18 13"/>
-  <rect x="270" y="190" width="100" height="3" fill="#1B3F91"/>
-  <text x="320" y="258" text-anchor="middle" font-family="Georgia, serif" font-size="34" font-weight="bold" fill="#16223F">MAPA PENDENTE</text>
+  <rect width="640" height="480" fill="#EDE6DA"/>
+  <rect x="12" y="12" width="616" height="456" fill="none" stroke="#C8863A" stroke-width="4" stroke-dasharray="18 13"/>
+  <rect x="270" y="190" width="100" height="3" fill="#C8863A"/>
+  <text x="320" y="258" text-anchor="middle" font-family="Georgia, serif" font-size="34" font-weight="bold" fill="#101A33">MAPA PENDENTE</text>
   <text x="320" y="296" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#4A5570">aguardando endereço definitivo</text>
 </svg>

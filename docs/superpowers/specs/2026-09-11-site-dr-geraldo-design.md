@@ -171,36 +171,41 @@ e não substitui consulta médica."
 
 ## 7. Identidade visual
 
-**Direção: prontuário editorial.** O site é uma monografia bem composta em papel quente —
-fios de cabelo no lugar de cards, numerais grandes e vazados, muito respiro. O vocabulário
-visual da *leitura*, porque a tese do site é que aqui se explica com calma. Deliberadamente
-o oposto do template de clínica: nada de azul sobre branco, cantos arredondados e sombras.
+**Direção: editorial de alto contraste.** O site alterna papel quente e sangrias de tinta
+escura, com um acento ocre quebrando o azul. Três momentos de tinta dão o ritmo: a abertura,
+os depoimentos e o rodapé. Entre eles, papel com cards que têm profundidade real.
 
-Paleta derivada do IMI, assentada sobre papel em vez de branco:
+**A abertura não depende de foto.** É uma declaração tipográfica de sangria total sobre
+tinta, com uma grade de fios quase imperceptível dando material ao fundo. O retrato desce
+para a seção "Sobre", onde pertence editorialmente. Isso resolve um problema concreto: com
+a foto ainda pendente, a primeira impressão era uma caixa tracejada vazia ocupando meia tela.
 
 ```
---papel:             #F6F2EA   fundo
---papel-2:           #EDE6D9   seções alternadas
---tinta:             #16223F   corpo de texto, rodapé, nota honesta
---tinta-suave:       #4A5570   texto secundário
---azul:              #1B3F91   IMI — títulos, fios, botão
---acao:              #175F83   links e foco (AA sobre os dois papéis)
---papel-sobre-tinta: #D6DAE6   texto claro sobre fundo escuro
---fio:               #D8CDB8   fio de cabelo, decorativo
---pendente-bg:       #F2E3B8   marcador de pendência
+--papel:        #F7F3EC   fundo
+--papel-2:      #EDE6DA   seções alternadas
+--tinta:        #101A33   abertura, depoimentos, rodapé, nota honesta
+--tinta-suave:  #4A5570   texto secundário no papel
+--sobre-tinta:  #C9CEDC   texto secundário sobre tinta (11:1)
+--azul:         #1B3F91   IMI — títulos, botão
+--acao:         #175F83   links e foco
+--ocre:         #C8863A   acento: filetes, numerais, aspas, marcador do FAQ
+--ocre-texto:   #94531A   quando o ocre precisa ser texto legível no papel
 ```
 
-**Tipografia: Fraunces + Karla**, ambas hospedadas no próprio domínio. Fraunces é uma
-serifada variável com personalidade, com eixo óptico — não é Inter, Roboto nem Space
-Grotesk. Karla carrega o texto corrido sem a neutralidade genérica das grotescas de
-interface. Corpo em 17px, medida de 64 caracteres.
+**Tipografia: Fraunces + Karla**, hospedadas no próprio domínio. Fraunces é uma serifada
+variável com eixo óptico — não é Inter, Roboto nem Space Grotesk.
 
-**Hospedar as fontes localmente não é detalhe:** servidas pelo Google, bloqueavam a
-renderização por 2,4 s e derrubavam a nota de performance de 99 para 84. Locais, o site
-faz **zero requisições externas**.
+**Hospedar as fontes localmente não é detalhe:** pelo Google elas bloqueavam a renderização
+por 2,4 s e derrubavam a performance de 99 para 84. Locais, o site faz **zero requisições
+externas** e fecha o Lighthouse em 100.
+
+**Elementos de composição:** numerais de seção vazados em contorno (01–06) como ornamento na
+margem, escondidos abaixo de 900px onde colidiriam; numerais sólidos em ocre nos quatro
+passos da consulta; aspas de 5rem nos depoimentos; ficha de masthead em versalete sob a
+abertura; sombras quentes, nunca cinzas — cinza sobre papel parece sujeira.
 
 **Proibido no projeto:** banco de imagens com jaleco e estetoscópio; ícones decorativos de
-saúde; contadores de números; gradientes coloridos; antes e depois; cards com sombra.
+saúde; contadores de números; gradientes coloridos; antes e depois; emoji como ícone.
 
 ## 8. Decisões técnicas
 
