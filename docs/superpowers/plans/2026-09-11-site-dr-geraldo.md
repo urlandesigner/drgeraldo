@@ -997,22 +997,22 @@ Substituir `<section id="pacientes"></section>` por:
     <div class="depoimentos">
       <blockquote class="depoimento">
         <p>"Explica as coisas olhando nos seus olhos."</p>
-        <cite>Paciente anônimo · novembro de 2018</cite>
+        <footer>Paciente anônimo · novembro de 2018</footer>
       </blockquote>
 
       <blockquote class="depoimento">
         <p>"Você sai do consultório sem nenhuma dúvida."</p>
-        <cite>Paciente anônimo · janeiro de 2017</cite>
+        <footer>Paciente anônimo · janeiro de 2017</footer>
       </blockquote>
 
       <blockquote class="depoimento">
         <p>"Demorou um pouco, mas valeu a pena esperar. Médico atencioso e simpático."</p>
-        <cite>Paciente anônimo · junho de 2017</cite>
+        <footer>Paciente anônimo · junho de 2017</footer>
       </blockquote>
 
       <blockquote class="depoimento">
         <p>"Entendeu minhas necessidades e montou um plano de ação adequado."</p>
-        <cite>Fabiano de Paula · agosto de 2023</cite>
+        <footer>Fabiano de Paula · agosto de 2023</footer>
       </blockquote>
     </div>
 
@@ -1069,7 +1069,7 @@ Substituir `<section id="consultorio"></section>` por:
 
     <a href="https://maps.google.com/?q=Vila+Velha+ES" rel="noopener">
       <img src="img/mapa-consultorio.svg"
-           alt="Mapa da localização do consultório em Vila Velha"
+           alt="Localização do consultório em Vila Velha — mapa provisório; abre no Google Maps"
            width="640" height="480">
     </a>
   </div>
@@ -1081,9 +1081,13 @@ Substituir `<section id="consultorio"></section>` por:
 ```css
 .depoimentos {
   display: grid; gap: 1.25rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  /* Mesmo motivo de .passos: 4 itens com auto-fit resolvem para 3 colunas
+     dentro do container de 68rem e deixam o quarto depoimento órfão. */
+  grid-template-columns: 1fr;
   margin: 2rem 0;
 }
+@media (min-width: 640px)  { .depoimentos { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .depoimentos { grid-template-columns: repeat(4, 1fr); } }
 .depoimento {
   margin: 0;
   background: var(--branco);
@@ -1098,7 +1102,7 @@ Substituir `<section id="consultorio"></section>` por:
   margin: 0 0 .9rem;
   max-width: none;
 }
-.depoimento cite {
+.depoimento footer {
   font-style: normal;
   font-size: .84rem;
   color: #5A6475;
