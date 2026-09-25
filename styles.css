@@ -213,3 +213,39 @@ section { padding-block: var(--secao-y); }
   color: #5A6475;
   font-size: .92rem;
 }
+
+.depoimentos {
+  display: grid; gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin: 2rem 0;
+}
+.depoimento {
+  margin: 0;
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+.depoimento p {
+  font-family: var(--fonte-titulo);
+  font-size: 1.08rem;
+  color: var(--azul-institucional);
+  margin: 0 0 .9rem;
+  max-width: none;
+}
+.depoimento cite {
+  font-style: normal;
+  font-size: .84rem;
+  color: #5A6475;
+}
+
+.consultorio__grid {
+  display: grid; gap: 2.5rem;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+}
+.consultorio__grid img { border-radius: 10px; border: 1px solid var(--borda); }
+
+@media (max-width: 820px) {
+  .consultorio__grid { grid-template-columns: 1fr; }
+}
