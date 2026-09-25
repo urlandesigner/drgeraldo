@@ -792,8 +792,12 @@ Essa nota final é intencional: a única crítica recorrente nas 13 avaliações
 .passos {
   list-style: none; padding: 0; margin: 0;
   display: grid; gap: 1.25rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  /* Colunas explícitas, não auto-fit: com 4 itens e o container travado em 68rem,
+     o auto-fit resolve para 3 colunas e deixa o quarto passo órfão. */
+  grid-template-columns: 1fr;
 }
+@media (min-width: 640px)  { .passos { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .passos { grid-template-columns: repeat(4, 1fr); } }
 .passo {
   background: var(--branco);
   border: 1px solid var(--borda);
@@ -920,9 +924,12 @@ A última linha do terceiro bloco é a mais importante do ponto de vista ético 
 ```css
 .temas {
   display: grid; gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* Três itens: só 1 ou 3 colunas evitam deixar um card órfão em meia largura.
+     O auto-fit resolvia para 2 colunas entre 768px e 948px. */
+  grid-template-columns: 1fr;
   margin-top: 2rem;
 }
+@media (min-width: 900px) { .temas { grid-template-columns: repeat(3, 1fr); } }
 .tema {
   border: 1px solid var(--borda);
   border-radius: 10px;
@@ -942,7 +949,7 @@ A última linha do terceiro bloco é a mais importante do ponto de vista ético 
 
 - [ ] **Step 3: Verificar contraste do texto atenuado**
 
-O `#5A6475` sobre `#FFFFFF` precisa atingir AA (4.5:1). Conferir em https://webaim.org/resources/contrastchecker/ — a razão é aproximadamente 6.4:1, portanto passa. Se alguém escurecer o fundo do card depois, refazer essa conta.
+O `#5A6475` sobre `#FFFFFF` precisa atingir AA (4.5:1). Conferir em https://webaim.org/resources/contrastchecker/ — a razão é 5,97:1, portanto passa. Se alguém escurecer o fundo do card depois, refazer essa conta.
 
 - [ ] **Step 4: Rodar a verificação**
 
