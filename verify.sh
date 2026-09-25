@@ -70,6 +70,22 @@ for meta in '<title>' 'name="description"' 'property="og:title"' 'property="og:d
   fi
 done
 
+# --- Pendências continuam marcadas ---
+pend=$(grep -c 'class="pendente"' index.html)
+if [ "$pend" -ge 7 ]; then
+  ok "pendências marcadas: $pend"
+else
+  falha "só $pend pendências marcadas, esperado no mínimo 7"
+fi
+
+# --- Um único h1 ---
+h1=$(grep -o '<h1' index.html | wc -l | tr -d ' ')
+if [ "$h1" -eq 1 ]; then
+  ok "exatamente um <h1>"
+else
+  falha "$h1 tags <h1>, esperado exatamente 1"
+fi
+
 echo
 if [ "$falhas" -eq 0 ]; then
   printf '\033[32mTudo passou.\033[0m\n'; exit 0

@@ -23,13 +23,29 @@
 /* O cabeçalho é sticky: âncoras precisam parar abaixo dele, senão o título
    da seção fica escondido atrás da barra. O valor acompanha --nav-h, que
    muda no mobile porque a navegação passa a ocupar duas linhas. */
-html { scroll-padding-top: calc(var(--nav-h) + 1.25rem); }
+html { scroll-padding-top: calc(var(--nav-h) + 1.25rem); scroll-behavior: smooth; }
 
 /* A barra quebra em duas linhas bem antes do breakpoint de layout: o botão de
    WhatsApp só volta para a mesma linha dos links a partir de 960px. Por isso a
    altura acompanha 959px, e não os 860px da media query de layout — senão o
    scroll-padding fica ~28px curto em toda a faixa 861–959px. */
 @media (max-width: 959px) { :root { --nav-h: 8.25rem; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* Alvo de toque mínimo de 44px nos links de navegação e no FAQ.
+   A caixa clicável do `summary` mede 30,6px (18px × line-height 1,7), então
+   `.35rem` de cada lado ainda deixaria em 42px, abaixo dos 44px recomendados. `.5rem` leva a 46,6px. */
+@media (pointer: coarse) {
+  .nav__links a { padding-block: .7rem; }
+  .duvidas summary { padding-block: .5rem; }
+}
 
 body {
   margin: 0;
