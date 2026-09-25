@@ -25,6 +25,12 @@
    muda no mobile porque a navegação passa a ocupar duas linhas. */
 html { scroll-padding-top: calc(var(--nav-h) + 1.25rem); }
 
+/* A barra quebra em duas linhas bem antes do breakpoint de layout: o botão de
+   WhatsApp só volta para a mesma linha dos links a partir de 960px. Por isso a
+   altura acompanha 959px, e não os 860px da media query de layout — senão o
+   scroll-padding fica ~28px curto em toda a faixa 861–959px. */
+@media (max-width: 959px) { :root { --nav-h: 8.25rem; } }
+
 body {
   margin: 0;
   font-family: var(--fonte-corpo);
@@ -122,7 +128,6 @@ section { padding-block: var(--secao-y); }
 .cta--nav { padding: .55rem 1.1rem; font-size: .92rem; }
 
 @media (max-width: 860px) {
-  :root { --nav-h: 8.25rem; }
   .nav__wrap { flex-wrap: wrap; }
   .marca { width: 100%; }
   .nav__links { flex: 1; margin-inline-start: 0; }

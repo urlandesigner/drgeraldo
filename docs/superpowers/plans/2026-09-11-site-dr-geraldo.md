@@ -669,10 +669,13 @@ Logo após a regra `box-sizing`:
 html { scroll-padding-top: calc(var(--nav-h) + 1.25rem); }
 ```
 
-E dentro da media query de 860px que já existe, como primeira declaração:
+E uma media query própria para a altura — **959px, não 860px**. A barra quebra em duas
+linhas bem antes do breakpoint de layout: o botão de WhatsApp só volta para a linha dos
+links a partir de 960px. Usar 860px aqui deixa o `scroll-padding` cerca de 28px curto em
+toda a faixa 861–959px:
 
 ```css
-  :root { --nav-h: 8.25rem; }
+@media (max-width: 959px) { :root { --nav-h: 8.25rem; } }
 ```
 
 Acrescentar também `role="list"` ao `<ul class="credenciais">`. O `list-style: none` remove a
@@ -685,7 +688,8 @@ semântica de lista em alguns leitores de tela; o atributo devolve, e custa nada
 ```
 
 Esperado: passa inteiro. Conferir em 360px e em 1280px que, ao clicar em cada link do menu,
-o título da seção de destino fica visível abaixo da barra.
+o topo da seção de destino fica abaixo da barra. Medir também em **900px**, dentro da faixa
+onde a barra quebra mas o layout ainda é de desktop — é onde o erro se esconde.
 
 - [ ] **Step 5: Confirmar que as pendências estão visíveis**
 
