@@ -59,7 +59,9 @@ Corpo em `18px`, `line-height 1.7`, medida máxima `68ch`.
 | `verify.sh` | Harness de verificação dos critérios de aceite |
 | `img/dr-geraldo.svg` | Retrato — placeholder SVG até a pendência 1 (troca para `.jpg` com a foto real) |
 | `img/mapa-consultorio.svg` | Mapa estático — placeholder SVG até a pendência 5 |
-| `img/og-cover.jpg` | Imagem de compartilhamento |
+| `img/og-cover.png` | Imagem de compartilhamento, 1200x630, gerada com Pillow |
+| `img/favicon.svg` | Ícone da aba |
+| `robots.txt` | Liberação para indexação |
 | `vercel.json` | Configuração mínima de deploy estático |
 
 **Classes sem regra CSS, de propósito.** As classes `.sobre`, `.consulta`, `.trato`,
@@ -192,7 +194,10 @@ Esperado: FALHA — `index.html` não existe ainda, então `grep` reclama e as c
 <meta property="og:type" content="website">
 <meta property="og:title" content="Dr. Geraldo Andrade do Norte">
 <meta property="og:description" content="Você vai sair da consulta entendendo o que está acontecendo com o seu corpo.">
-<meta property="og:image" content="img/og-cover.jpg">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<meta property="og:image" content="img/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:locale" content="pt_BR">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -1377,18 +1382,32 @@ open index.html
 
 Testar em 360px, 768px e 1280px. Confirmar em cada uma: nada estoura horizontalmente; a foto da abertura aparece acima do texto no mobile; os cards de tema e de passo empilham; o mapa vai para baixo do endereço.
 
-- [ ] **Step 5: Rodar Lighthouse**
+- [ ] **Step 5: Criar os arquivos que o `<head>` referencia**
+
+O `<head>` da Task 1 aponta para uma imagem de compartilhamento que nenhuma task criava, e
+não havia favicon — o navegador pede `/favicon.ico` sozinho e recebe 404. **Esse único 404
+custava 9 pontos de performance e 4 de boas práticas no Lighthouse.**
+
+Gerar `img/og-cover.png` (1200×630) com Pillow, nas cores da marca, com o nome, o CRM e a
+frase de abertura. Criar `img/favicon.svg` com o monograma. Criar `robots.txt` liberando
+indexação.
+
+- [ ] **Step 6: Rodar Lighthouse**
+
+O Lighthouse **não aceita caminho de arquivo local** — precisa de uma URL servida. Subir o
+servidor antes:
 
 ```bash
-npx --yes lighthouse index.html --quiet --chrome-flags="--headless" --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=/tmp/lh.json && node -e "const r=require('/tmp/lh.json');for(const k in r.categories)console.log(k, Math.round(r.categories[k].score*100))"
+python3 -m http.server 8770 --bind 127.0.0.1 &
+npx --yes lighthouse http://127.0.0.1:8770/index.html --quiet --chrome-flags="--headless=new --no-sandbox" --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=/tmp/lh.json && node -e "const r=require('/tmp/lh.json');for(const k in r.categories)console.log(k, Math.round(r.categories[k].score*100))"
 ```
 
-Esperado: quatro categorias com 95 ou mais. Se Performance ficar abaixo, a causa mais provável é a imagem do retrato sem otimização — converter para WebP e reduzir para no máximo 800px de largura resolve. Se Acessibilidade ficar abaixo, ler os itens apontados; os suspeitos são contraste e ordem de títulos.
+Esperado: quatro categorias com 95 ou mais. Medido neste projeto: 99 / 100 / 100 / 100. Se Performance ficar abaixo, procurar 404 primeiro — um recurso faltando derruba mais nota que qualquer otimização de imagem. Depois, a imagem do retrato sem otimização — converter para WebP e reduzir para no máximo 800px de largura resolve. Se Acessibilidade ficar abaixo, ler os itens apontados; os suspeitos são contraste e ordem de títulos.
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 7: Commit**
 
 ```bash
-git add styles.css verify.sh
+git add styles.css verify.sh img/og-cover.png img/favicon.svg robots.txt index.html
 git commit -m "test: checagens de pendência e h1; a11y e responsividade"
 ```
 
