@@ -226,7 +226,14 @@ registrado para a v2.
 ### Depoimentos — item aberto
 Reproduzidos com crédito e link ao Doctoralia, nunca como texto próprio do site.
 **Validar o enquadramento atual de depoimento de paciente em publicidade médica junto ao
-CRM-ES antes de publicar.** Não há certeza sobre a regra vigente e não se deve chutar em
+CRM-ES antes de publicar.**
+
+**Segundo item aberto, decidido pelo cliente em 2026-09-24:** três dos quatro depoimentos
+estão anônimos; o quarto traz o nome completo do paciente, como publicado no Doctoralia.
+O cliente optou por **manter o nome**. Publicar nome completo ligado a atendimento médico,
+no site do próprio médico, é tratamento de dado sensível de saúde fora do contexto original
+em que a pessoa publicou. Confirmar consentimento do próprio paciente antes de ir ao ar,
+ou anonimizar na publicação. Não há certeza sobre a regra vigente e não se deve chutar em
 matéria que gera processo ético. Se houver vedação, substituir a seção 6.7 por um link
 simples ao perfil do Doctoralia.
 
