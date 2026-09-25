@@ -1252,7 +1252,6 @@ Substituir `<footer></footer>` por:
   cursor: pointer;
   font-weight: 600;
   color: var(--azul-institucional);
-  list-style-position: outside;
 }
 .duvidas details[open] summary { margin-bottom: .75rem; }
 .duvidas details p { margin: 0; font-size: .97rem; }
@@ -1263,10 +1262,16 @@ Substituir `<footer></footer>` por:
   padding-block: 3rem 2rem;
 }
 .rodape a { color: var(--branco); }
+/* O anel de foco global usa --azul-acao, calibrado para fundo claro: sobre o
+   azul institucional do rodapé ele cai para 1,85:1 e some. Branco dá 9,69:1. */
+.rodape a:focus-visible { outline-color: var(--branco); }
 .rodape__grid {
   display: grid; gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  /* Só dois filhos ocupam coluna (o terceiro atravessa a linha), então o
+     auto-fit abria até 4 colunas e deixava metade da linha vazia. */
+  grid-template-columns: 1fr;
 }
+@media (min-width: 640px) { .rodape__grid { grid-template-columns: repeat(2, 1fr); } }
 .rodape__marca {
   font-family: var(--fonte-titulo);
   font-size: 1.1rem;
@@ -1353,10 +1358,12 @@ html { scroll-behavior: smooth; }
   }
 }
 
-/* Alvo de toque mínimo de 44px nos links de navegação e no FAQ. */
+/* Alvo de toque mínimo de 44px nos links de navegação e no FAQ.
+   A caixa clicável do `summary` mede 30,6px (18px × line-height 1,7), então
+   `.35rem` de cada lado ainda deixaria em 42px. `.5rem` leva a 46,6px. */
 @media (pointer: coarse) {
   .nav__links a { padding-block: .7rem; }
-  .duvidas summary { padding-block: .35rem; }
+  .duvidas summary { padding-block: .5rem; }
 }
 ```
 

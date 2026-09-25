@@ -274,7 +274,6 @@ section { padding-block: var(--secao-y); }
   cursor: pointer;
   font-weight: 600;
   color: var(--azul-institucional);
-  list-style-position: outside;
 }
 .duvidas details[open] summary { margin-bottom: .75rem; }
 .duvidas details p { margin: 0; font-size: .97rem; }
@@ -285,10 +284,17 @@ section { padding-block: var(--secao-y); }
   padding-block: 3rem 2rem;
 }
 .rodape a { color: var(--branco); }
+/* O anel de foco global usa --azul-acao, calibrado para fundo claro: sobre o
+   azul institucional do rodapé ele cai para 1,85:1 e some. Branco dá 9,69:1. */
+.rodape a:focus-visible { outline-color: var(--branco); }
 .rodape__grid {
   display: grid; gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  /* Último auto-fit do projeto, pelo mesmo motivo dos outros três: só há dois
+     filhos que ocupam coluna (o terceiro atravessa a linha inteira), então o
+     auto-fit abria até 4 colunas e deixava metade da linha vazia. */
+  grid-template-columns: 1fr;
 }
+@media (min-width: 640px) { .rodape__grid { grid-template-columns: repeat(2, 1fr); } }
 .rodape__marca {
   font-family: var(--fonte-titulo);
   font-size: 1.1rem;
