@@ -257,3 +257,45 @@ section { padding-block: var(--secao-y); }
 @media (max-width: 820px) {
   .consultorio__grid { grid-template-columns: 1fr; }
 }
+
+.duvidas details {
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: .75rem;
+  max-width: var(--medida);
+}
+.duvidas summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--azul-institucional);
+  list-style-position: outside;
+}
+.duvidas details[open] summary { margin-bottom: .75rem; }
+.duvidas details p { margin: 0; font-size: .97rem; }
+
+.rodape {
+  background: var(--azul-institucional);
+  color: #D8E0F2;
+  padding-block: 3rem 2rem;
+}
+.rodape a { color: var(--branco); }
+.rodape__grid {
+  display: grid; gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+.rodape__marca {
+  font-family: var(--fonte-titulo);
+  font-size: 1.1rem;
+  color: var(--branco);
+  display: block;
+  margin-bottom: .5rem;
+}
+.rodape__aviso {
+  grid-column: 1 / -1;
+  border-top: 1px solid rgba(255,255,255,.2);
+  padding-top: 1.25rem;
+  font-size: .85rem;
+  max-width: none;
+}
