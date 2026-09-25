@@ -29,7 +29,8 @@ não caminho de arquivo:
 
 ## Pendências antes de publicar
 
-1. Fotos profissionais do médico
+1. Fotos profissionais do médico — o retrato da abertura é o único do site.
+   Se houver uma segunda foto, ela cabe na seção "Sobre".
 2. Bio e formação (faculdade, ano, residência, sociedades)
 3. Confirmação de RQE — sem ele, o site não pode chamá-lo de endocrinologista
 4. Número de WhatsApp correto
