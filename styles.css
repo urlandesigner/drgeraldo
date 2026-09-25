@@ -162,3 +162,28 @@ section { padding-block: var(--secao-y); }
   width: .5rem; height: .5rem; border-radius: 50%;
   background: var(--azul-claro);
 }
+
+.consulta__intro { font-size: 1.08rem; margin-bottom: 2.5rem; }
+
+.passos {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.passo {
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+.passo h3 { margin-bottom: .6rem; }
+.passo p { margin: 0; font-size: .98rem; }
+
+.nota-honesta {
+  margin-top: 2.5rem;
+  border-inline-start: 4px solid var(--azul-claro);
+  background: var(--branco);
+  border-radius: 0 10px 10px 0;
+  padding: 1.75rem 1.75rem 1.25rem;
+}
+.nota-honesta h3 { margin-bottom: .8rem; }
