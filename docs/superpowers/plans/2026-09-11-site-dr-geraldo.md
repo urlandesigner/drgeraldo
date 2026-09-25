@@ -1363,9 +1363,16 @@ html { scroll-behavior: smooth; }
   }
 }
 
-/* Alvo de toque mínimo de 44px nos links de navegação e no FAQ.
-   A caixa clicável do `summary` mede 30,6px (18px × line-height 1,7), então
-   `.35rem` de cada lado ainda deixaria em 42px. `.5rem` leva a 46,6px. */
+/* Alvo de toque de 44px em telas de toque. A caixa clicável do `summary` mede
+   30,6px (18px × line-height 1,7), então `.35rem` de cada lado deixaria em 42px;
+   `.5rem` leva a 46,6px.
+
+   ESTE BLOCO TEM DE FICAR NO FIM DO ARQUIVO. A regra base `.nav__links a` tem a
+   mesma especificidade, e em CSS quem vem depois vence — inclusive sobre um
+   @media cuja condição é verdadeira. No topo do arquivo ele é silenciosamente
+   anulado e o alvo fica em 33,8px, sem nenhuma ferramenta acusar: o Lighthouse
+   não audita alvo de toque nas quatro categorias, e o Chrome headless se
+   reporta como `pointer: fine`. Só medindo com `coarse` emulado aparece. */
 @media (pointer: coarse) {
   .nav__links a { padding-block: .7rem; }
   .duvidas summary { padding-block: .5rem; }
@@ -1426,6 +1433,10 @@ git commit -m "test: checagens de pendência e h1; a11y e responsividade"
 - [ ] **Step 1: Criar a configuração de deploy estático**
 
 `vercel.json`:
+
+Na Task 10, ao configurar o domínio, **trocar o `og:image` de caminho relativo para URL
+absoluta** (`https://<dominio>/img/og-cover.png`). Crawlers de WhatsApp, Facebook e LinkedIn
+exigem URL absoluta para resolver a imagem de preview.
 
 ```json
 {

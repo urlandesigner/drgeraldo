@@ -42,10 +42,6 @@ html { scroll-padding-top: calc(var(--nav-h) + 1.25rem); scroll-behavior: smooth
 /* Alvo de toque mínimo de 44px nos links de navegação e no FAQ.
    A caixa clicável do `summary` mede 30,6px (18px × line-height 1,7), então
    `.35rem` de cada lado ainda deixaria em 42px, abaixo dos 44px recomendados. `.5rem` leva a 46,6px. */
-@media (pointer: coarse) {
-  .nav__links a { padding-block: .7rem; }
-  .duvidas summary { padding-block: .5rem; }
-}
 
 body {
   margin: 0;
@@ -324,4 +320,13 @@ section { padding-block: var(--secao-y); }
   padding-top: 1.25rem;
   font-size: .85rem;
   max-width: none;
+}
+
+/* Alvo de toque de 44px em telas de toque. Este bloco fica no FIM do arquivo de
+   propósito: a regra base `.nav__links a` tem a mesma especificidade, e em CSS
+   quem vem depois vence — inclusive sobre um @media cuja condição é verdadeira.
+   No topo do arquivo ele era silenciosamente anulado e o alvo ficava em 33,8px. */
+@media (pointer: coarse) {
+  .nav__links a { padding-block: .7rem; }
+  .duvidas summary { padding-block: .5rem; }
 }
