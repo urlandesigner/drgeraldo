@@ -64,6 +64,17 @@
   --secao-y: clamp(4.5rem, 9vw, 9rem);
   --nav-h: 4.5rem;
 
+  /* Escala de espaco. Antes cada bloco inventava o proprio valor
+     (1.35 / 1.7 / 2.3 / 2.4 / 2.6 / 3.5rem...) e o ritmo saia torto.
+     Daqui em diante todo espacamento vertical sai desta regua. */
+  --e1: .5rem;
+  --e2: .75rem;
+  --e3: 1.15rem;
+  --e4: 1.75rem;
+  --e5: 2.5rem;
+  --e6: 3.5rem;
+  --e7: clamp(3.5rem, 6vw, 5.5rem);
+
   /* Sombras quentes, não cinzas — o cinza sobre papel parece sujeira */
   --sombra-baixa: 0 1px 2px rgba(64,44,18,.07), 0 3px 8px -4px rgba(64,44,18,.12);
   --sombra-alta:  0 2px 4px rgba(64,44,18,.06), 0 18px 38px -16px rgba(64,44,18,.28);
@@ -136,42 +147,36 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ---------- Estrutura ------------------------------------------------- */
 
-.container { width: min(100% - 2.5rem, 74rem); margin-inline: auto; }
+.container { width: min(100% - 2.5rem, 66rem); margin-inline: auto; }
 section { padding-block: var(--secao-y); position: relative; }
 .fundo-claro { background: var(--papel-2); }
 
-/* Numeração fantasma das seções: ornamento grande na margem. */
+/* Numeral da seção. Era um fantasma de 9rem na margem direita: colidia com
+   o conteudo e nao se repetia igual em lugar nenhum. Agora e a sobrancelha
+   do titulo — mesmo desenho, mesma posicao, em todas as secoes. */
 main { counter-reset: secao; }
 main section[id] { counter-increment: secao; }
-main section[id] > .container { position: relative; }
-main section[id] > .container::before {
-  content: "0" counter(secao);
-  position: absolute;
-  top: -.08em; inset-inline-end: -.01em;
-  font-family: var(--display);
-  font-variation-settings: "opsz" 144;
-  font-size: clamp(4.5rem, 10vw, 9rem);
-  line-height: 1; font-weight: 600;
-  /* Vazado em contorno: ornamento editorial, não texto. */
-  color: transparent;
-  -webkit-text-stroke: 2px var(--fio-forte);
-  opacity: .85;
-  pointer-events: none;
-  z-index: 0;
-}
-/* No mobile o numeral colidiria com o título — some. */
-@media (max-width: 899px) { main section[id] > .container::before { display: none; } }
-main section[id] > .container > * { position: relative; z-index: 1; }
 
-/* Filete curto acima de cada título de seção */
+/* Sobrancelha: numeral + filete, identica acima de todo titulo de secao. */
 main section > .container h2::before,
 .consultorio__grid > div > h2::before {
   content: "";
   display: block;
-  width: 3.5rem; height: 4px;
-  background: var(--ocre);
-  margin-bottom: 1.7rem;
+  width: 3.5rem;
+  padding-bottom: var(--e2);
+  margin-bottom: var(--e4);
+  border-bottom: 4px solid var(--ocre);
+  font-family: var(--texto);
+  font-size: .72rem; font-weight: 700; letter-spacing: .2em;
+  color: var(--ocre-texto);
 }
+main section[id] > .container > h2::before,
+.consultorio__grid > div > h2::before { content: "0" counter(secao); }
+.pacientes h2::before { color: var(--ocre); }
+
+/* Um unico intervalo entre o titulo da secao e o que vem depois. */
+main section > .container > h2,
+.consultorio__grid > div > h2 { margin-bottom: var(--e5); }
 
 /* ---------- Cabeçalho -------------------------------------------------- */
 
@@ -259,7 +264,7 @@ main section > .container h2::before,
 .hero .container { position: relative; z-index: 1; }
 .hero__wrap { display: block; }
 
-.hero h1 { color: var(--papel); max-width: 17ch; margin-bottom: 2rem; }
+.hero h1 { color: var(--papel); max-width: 17ch; margin-bottom: var(--e5); }
 .hero h1::before {
   content: "";
   display: block;
@@ -271,14 +276,14 @@ main section > .container h2::before,
   font-size: clamp(1.1rem, 1.8vw, 1.32rem);
   color: var(--sobre-tinta);
   max-width: 46ch;
-  margin-bottom: 2.4rem;
+  margin-bottom: var(--e5);
 }
 .hero .cta { background: var(--papel); color: var(--tinta); }
 .hero .cta:hover { background: var(--ocre); color: var(--tinta); }
 
 /* Ficha de masthead: os fatos duros, em versalete, separados por fio. */
 .ficha {
-  list-style: none; margin: 3rem 0 0; padding: 1.4rem 0 0;
+  list-style: none; margin: var(--e6) 0 0; padding: var(--e3) 0 0;
   border-top: 1px solid rgba(201,206,220,.25);
   display: flex; flex-wrap: wrap; gap: .5rem 2.5rem;
 }
@@ -293,7 +298,7 @@ main section > .container h2::before,
 }
 .ficha li:first-child::before { display: none; }
 
-.hero__selo { margin: 1.4rem 0 0; color: var(--sobre-tinta); }
+.hero__selo { margin: var(--e3) 0 0; color: var(--sobre-tinta); }
 .hero__selo a { color: var(--sobre-tinta); text-decoration-color: rgba(201,206,220,.45); }
 .hero__selo a:hover { color: var(--ocre); }
 
@@ -309,15 +314,15 @@ main section > .container h2::before,
   line-height: 1.3;
   color: var(--azul);
   border-top: 4px solid var(--ocre);
-  padding-top: 1.7rem;
-  margin-top: 2.6rem;
+  padding-top: var(--e4);
+  margin-top: var(--e5);
   max-width: 30ch;
 }
 .incomodo p:last-child strong { font-weight: 600; }
 
 /* ---------- Sobre --------------------------------------------------------- */
 
-.sobre .container { display: grid; gap: clamp(2rem, 4vw, 3.5rem); }
+.sobre .container { display: grid; gap: var(--e5); }
 .retrato { margin: 0; }
 .retrato img {
   border: 1px solid var(--fio-forte);
@@ -326,18 +331,27 @@ main section > .container h2::before,
   box-shadow: var(--sombra-alta);
   width: 100%;
 }
+/* `grid-row: span 2` dava a figura uma area de ~230px para uma imagem de
+   565px: ela vazava e o paragrafo seguinte era impresso por cima dela.
+   Com o texto num bloco so, sao duas colunas e duas linhas, sem vazamento. */
 @media (min-width: 900px) {
-  .sobre .container { grid-template-columns: .82fr 1.18fr; align-items: start; column-gap: clamp(3rem,5vw,5rem); }
-  .sobre h2 { grid-column: 1 / -1; }
-  .retrato { grid-row: span 2; position: sticky; top: calc(var(--nav-h) + 2rem); }
+  .sobre .container {
+    grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
+    align-items: start;
+    column-gap: var(--e6);
+  }
+  .sobre .container > h2 { grid-column: 1 / -1; margin-bottom: 0; }
+  .retrato { position: sticky; top: calc(var(--nav-h) + var(--e5)); }
 }
+.sobre__texto > p:first-child { margin-top: 0; }
+.sobre__texto > :last-child { margin-bottom: 0; }
 
 .credenciais {
-  list-style: none; padding: 0; margin: 2.4rem 0 0;
+  list-style: none; padding: 0; margin: var(--e5) 0 0;
   border-top: 1px solid var(--fio);
 }
 .credenciais li {
-  padding: .9rem 0 .9rem 1.7rem;
+  padding: var(--e2) 0 var(--e2) var(--e4);
   border-bottom: 1px solid var(--fio);
   position: relative; font-size: .98rem;
 }
@@ -356,7 +370,7 @@ main section > .container h2::before,
 
 .consulta__intro {
   font-size: 1.18rem; color: var(--tinta-suave);
-  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: var(--e6);
 }
 .passos {
   list-style: none; padding: 0; margin: 0;
@@ -367,7 +381,7 @@ main section > .container h2::before,
 .passo {
   counter-increment: passo;
   position: relative;
-  padding: 2.3rem 0 2.3rem 5rem;
+  padding: var(--e5) 0 var(--e5) 5rem;
   border-bottom: 1px solid var(--fio);
 }
 /* Numeral sólido em ocre: âncora visual da sequência. */
@@ -380,7 +394,7 @@ main section > .container h2::before,
   color: var(--ocre);
   letter-spacing: -.04em;
 }
-.passo h3 { margin-bottom: .55rem; }
+.passo h3 { margin-bottom: var(--e1); }
 .passo p { margin: 0; color: var(--tinta-suave); }
 
 @media (min-width: 860px) {
@@ -388,18 +402,17 @@ main section > .container h2::before,
 }
 
 .nota-honesta {
-  margin-top: clamp(3rem, 6vw, 5rem);
+  margin-top: var(--e7);
   background: var(--tinta); color: var(--papel);
   padding: clamp(2.2rem, 4.5vw, 3.75rem);
   border-radius: 3px;
   border-inline-start: 6px solid var(--ocre);
   box-shadow: var(--sombra-alta);
-  max-width: 56rem;
 }
 .nota-honesta h3 {
   color: var(--papel);
   font-size: clamp(1.5rem, 2.9vw, 2.15rem);
-  margin-bottom: 1.3rem;
+  margin-bottom: var(--e3);
 }
 .nota-honesta h3::before { display: none; }
 .nota-honesta p { color: var(--sobre-tinta); }
@@ -408,7 +421,7 @@ main section > .container h2::before,
   font-family: var(--display);
   font-variation-settings: "opsz" 48;
   font-size: 1.35rem; line-height: 1.4;
-  margin: 1.9rem 0 0; padding-top: 1.6rem;
+  margin: var(--e4) 0 0; padding-top: var(--e4);
   border-top: 1px solid rgba(201,206,220,.25);
 }
 .nota-honesta p:last-child strong { font-weight: 600; }
@@ -416,30 +429,30 @@ main section > .container h2::before,
 /* ---------- O que eu trato -------------------------------------------------- */
 
 .temas {
-  display: grid; grid-template-columns: 1fr; gap: 1.5rem;
-  margin-top: clamp(2rem, 4vw, 3rem);
+  display: grid; grid-template-columns: 1fr; gap: var(--e4);
+  margin-top: 0;
 }
 .tema {
   background: var(--papel);
   border: 1px solid var(--fio);
   border-top: 4px solid var(--azul);
   border-radius: 3px;
-  padding: 2.2rem 1.9rem;
+  padding: var(--e5) var(--e4);
   box-shadow: var(--sombra-baixa);
   transition: transform .25s, box-shadow .25s;
 }
 .tema:hover { transform: translateY(-4px); box-shadow: var(--sombra-alta); }
-.tema h3 { font-size: 1.42rem; margin-bottom: 1rem; }
+.tema h3 { font-size: 1.42rem; margin-bottom: var(--e3); }
 .tema h3::before { display: none; }
 .tema p { font-size: .98rem; color: var(--tinta-suave); max-width: none; }
 .tema p strong { color: var(--tinta); }
 .tema__limite {
-  margin: 1.5rem 0 0; padding: 1.1rem 0 0;
+  margin: var(--e4) 0 0; padding: var(--e3) 0 0;
   border-top: 1px solid var(--fio);
   font-size: .92rem;
 }
 .tema__limite strong { color: var(--ocre-texto); }
-@media (min-width: 900px) { .temas { grid-template-columns: repeat(3, 1fr); gap: 1.75rem; } }
+@media (min-width: 900px) { .temas { grid-template-columns: repeat(3, 1fr); gap: var(--e4); } }
 
 /* ---------- Depoimentos: segunda sangria de tinta --------------------------- */
 
@@ -453,11 +466,11 @@ main section > .container h2::before,
 
 .depoimentos {
   display: grid; grid-template-columns: 1fr; gap: 0;
-  margin: clamp(2.5rem, 5vw, 3.5rem) 0 2.5rem;
+  margin: var(--e5) 0 var(--e5);
   border-top: 1px solid rgba(201,206,220,.22);
 }
 .depoimento {
-  margin: 0; padding: 2.3rem 0 2.3rem 3.4rem;
+  margin: 0; padding: var(--e5) 0 var(--e5) 3.4rem;
   border-bottom: 1px solid rgba(201,206,220,.22);
   position: relative;
 }
@@ -478,7 +491,7 @@ main section > .container h2::before,
 
 /* ---------- Consultório ------------------------------------------------------ */
 
-.consultorio__grid { display: grid; grid-template-columns: 1fr; gap: clamp(2.5rem,5vw,4rem); align-items: start; }
+.consultorio__grid { display: grid; grid-template-columns: 1fr; gap: var(--e6); align-items: start; }
 .consultorio__grid p { font-size: 1rem; }
 .consultorio__grid p strong {
   display: inline-block; color: var(--ocre-texto);
@@ -488,17 +501,16 @@ main section > .container h2::before,
   border: 1px solid var(--fio-forte); padding: .6rem;
   background: var(--papel); box-shadow: var(--sombra-alta);
 }
-.consultorio__grid .cta { margin-top: .9rem; }
-@media (min-width: 900px) { .consultorio__grid { grid-template-columns: 1fr 1fr; } }
+.consultorio__grid .cta { margin-top: var(--e2); }
+@media (min-width: 900px) { .consultorio__grid { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); } }
 
 /* ---------- Dúvidas ----------------------------------------------------------- */
 
-.duvidas .container > h2 { margin-bottom: clamp(2rem, 4vw, 3rem); }
-.duvidas details { border-top: 1px solid var(--fio); max-width: 58rem; }
+.duvidas details { border-top: 1px solid var(--fio); }
 .duvidas details:last-of-type { border-bottom: 1px solid var(--fio); }
 .duvidas summary {
   cursor: pointer; list-style: none;
-  padding: 1.35rem 3rem 1.35rem 0; position: relative;
+  padding: var(--e3) 3rem var(--e3) 0; position: relative;
   font-family: var(--display);
   font-variation-settings: "opsz" 28;
   font-size: 1.14rem; font-weight: 600; color: var(--azul);
@@ -513,7 +525,7 @@ main section > .container h2::before,
 .duvidas summary::before { top: 50%; width: 1rem; height: 2px; margin-top: -1px; }
 .duvidas summary::after  { top: 50%; width: 2px; height: 1rem; margin-top: -.5rem; inset-inline-end: .8rem; }
 .duvidas details[open] summary::after { transform: rotate(90deg); opacity: 0; }
-.duvidas details p { margin: 0 0 1.5rem; font-size: 1rem; color: var(--tinta-suave); max-width: 58ch; }
+.duvidas details p { margin: 0 0 var(--e4); font-size: 1rem; color: var(--tinta-suave); max-width: 58ch; }
 
 /* ---------- Rodapé -------------------------------------------------------------- */
 
@@ -525,17 +537,17 @@ main section > .container h2::before,
 .rodape a { color: var(--papel); }
 .rodape a:hover { color: var(--ocre); }
 .rodape a:focus-visible { outline-color: var(--papel); }
-.rodape__grid { display: grid; gap: 2.25rem; grid-template-columns: 1fr; }
+.rodape__grid { display: grid; gap: var(--e5); grid-template-columns: 1fr; }
 .rodape__marca {
   font-family: var(--display); font-variation-settings: "opsz" 28;
   font-size: 1.12rem; font-weight: 600; color: var(--papel);
-  display: block; margin-bottom: .55rem;
+  display: block; margin-bottom: var(--e1);
 }
 .rodape p { font-size: .95rem; }
 .rodape__aviso {
   grid-column: 1 / -1;
   border-top: 1px solid rgba(201,206,220,.2);
-  padding-top: 1.4rem; font-size: .84rem; max-width: 62ch;
+  padding-top: var(--e3); font-size: .84rem; max-width: 62ch;
 }
 @media (min-width: 640px) { .rodape__grid { grid-template-columns: repeat(2, 1fr); } }
 
@@ -566,6 +578,12 @@ main section > .container h2::before,
 @media (pointer: coarse) {
   .nav__links a { padding-block: .7rem; }
   .duvidas summary { padding-block: .6rem; }
+  /* Alvos soltos (nao sao links no meio de frase) precisam dos 44px. */
+  .cta--nav { padding-block: .85rem; }
+  .marca { display: inline-block; padding-block: .35rem; }
+  /* Links dentro de paragrafo: a caixa de acerto cresce sem mexer na linha. */
+  .hero__selo a, .rodape a, .pacientes .container > p + a,
+  .pacientes a[href*="doctoralia"] { padding-block: .55rem; }
 }
 
 @media (max-width: 959px) { :root { --nav-h: 8rem; } }
