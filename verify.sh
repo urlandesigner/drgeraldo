@@ -74,13 +74,14 @@ done
 # O piso acompanha o que o cliente já respondeu: ele existe para pegar
 # remoção acidental, não para travar pendência resolvida de verdade.
 # 7 -> 6 quando o horário de atendimento foi confirmado (seg a sex, 8h-18h).
+# 6 -> 5 quando o endereço foi completado e o cliente dispensou a sala.
 # Segue 6: o endereço foi confirmado (R. Humberto Serrano, 995), mas a sala
 # entrou no lugar dele. Vira 5 quando a sala for confirmada.
 pend=$(grep -c 'class="pendente"' index.html)
-if [ "$pend" -ge 6 ]; then
+if [ "$pend" -ge 5 ]; then
   ok "pendências marcadas: $pend"
 else
-  falha "só $pend pendências marcadas, esperado no mínimo 6"
+  falha "só $pend pendências marcadas, esperado no mínimo 5"
 fi
 
 # --- Um único h1 ---
