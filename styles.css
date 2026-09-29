@@ -407,7 +407,6 @@ main section > .container > h2,
   counter-increment: passo;
   position: relative;
   padding: var(--e5) 0 var(--e5) 5rem;
-  border-bottom: 1px solid var(--fio);
 }
 /* Numeral sólido em ocre: âncora visual da sequência. */
 .passo::before {
@@ -427,9 +426,17 @@ main section > .container > h2,
 .passo h3 { margin-bottom: var(--e1); }
 .passo p { margin: 0; color: var(--tinta-suave); }
 
-@media (min-width: 860px) {
-  .passos { grid-template-columns: 1fr 1fr; column-gap: 4rem; }
+/* A grade 2x2 e o segundo componente mais generico da pagina. Em coluna
+   unica, com um fio ligando os circulos, as quatro etapas viram sequencia —
+   que e o que elas sao, e combina com "nenhuma tem hora marcada para acabar". */
+.passo::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: calc(1.55rem - 1px);
+  top: 5.3rem; bottom: -.4rem; width: 2px;
+  background: var(--fio-forte);
 }
+.passo:last-child::after { display: none; }
 
 .nota-honesta {
   margin-top: var(--e7);
@@ -458,8 +465,13 @@ main section > .container > h2,
 
 /* ---------- O que eu trato -------------------------------------------------- */
 
+/* Eram tres cartoes lado a lado — o componente mais generico que existe, e
+   que espremia "o que eu nao prometo" em nota de rodape. Agora sao tres
+   paineis de largura inteira, e o par promessa/nao-promessa e uma tabela de
+   duas colunas com o mesmo peso. Esse par e o diferencial do site: nenhum
+   concorrente publica o que nao entrega. */
 .temas {
-  display: grid; grid-template-columns: 1fr; gap: var(--e4);
+  display: grid; grid-template-columns: 1fr; gap: var(--e5);
   margin-top: 0;
 }
 .tema {
@@ -469,22 +481,34 @@ main section > .container > h2,
   border: 1px solid #E8E0D2;
   border-top: 4px solid var(--azul);
   border-radius: var(--r-md);
-  padding: var(--e5) var(--e4);
+  padding: var(--e5);
   box-shadow: var(--sombra-alta);
   transition: transform .25s, box-shadow .25s;
+  display: grid; gap: var(--e5);
 }
 .tema:hover { transform: translateY(-4px); box-shadow: var(--sombra-alta); }
 .tema h3 { font-size: 1.42rem; margin-bottom: var(--e3); }
 .tema h3::before { display: none; }
-.tema p { font-size: .98rem; color: var(--tinta-suave); max-width: none; }
+.tema p { font-size: 1rem; color: var(--tinta-suave); max-width: 52ch; }
 .tema p strong { color: var(--tinta); }
-.tema__limite {
-  margin: var(--e4) 0 0; padding: var(--e3) 0 0;
-  border-top: 1px solid var(--fio);
-  font-size: .92rem;
+@media (min-width: 900px) {
+  .tema { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); column-gap: var(--e6); align-items: start; }
 }
-.tema__limite strong { color: var(--ocre-texto); }
-@media (min-width: 900px) { .temas { grid-template-columns: repeat(3, 1fr); gap: var(--e4); } }
+
+.tema__texto > :last-child { margin-bottom: 0; }
+
+.balanco { margin: 0; display: grid; gap: var(--e4); }
+@media (min-width: 560px) { .balanco { grid-template-columns: 1fr 1fr; column-gap: var(--e4); } }
+.balanco__lado { border-top: 2px solid var(--azul); padding-top: var(--e2); }
+.balanco__lado--nao { border-top-color: var(--ocre); }
+.balanco dt {
+  font-family: var(--texto);
+  font-size: .7rem; letter-spacing: .14em; text-transform: uppercase;
+  font-weight: 700; color: var(--azul);
+  margin-bottom: var(--e2);
+}
+.balanco__lado--nao dt { color: var(--ocre-texto); }
+.balanco dd { margin: 0; font-size: 1rem; line-height: 1.62; color: var(--tinta-suave); }
 
 /* ---------- Depoimentos: segunda sangria de tinta --------------------------- */
 
@@ -576,7 +600,7 @@ main section > .container > h2,
   font-size: 1.12rem; font-weight: 600; color: var(--papel);
   display: block; margin-bottom: var(--e1);
 }
-.rodape p { font-size: .95rem; }
+.rodape p { font-size: 1rem; }
 .rodape__aviso {
   grid-column: 1 / -1;
   border-top: 1px solid rgba(201,206,220,.2);
