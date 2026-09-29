@@ -3,6 +3,7 @@
   <rect x="12" y="12" width="616" height="456" fill="none" stroke="#C8863A" stroke-width="4" stroke-dasharray="18 13"/>
   <path d="M320 168c-23 0-42 19-42 42 0 31 42 76 42 76s42-45 42-76c0-23-19-42-42-42zm0 57a15 15 0 1 1 0-30 15 15 0 0 1 0 30z" fill="#C8863A"/>
   <text x="320" y="330" text-anchor="middle" font-family="Georgia, serif" font-size="30" font-weight="bold" fill="#101A33">Instituto Médico Itapoã</text>
-  <text x="320" y="366" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#4A5570">Itapoã, Vila Velha — ES</text>
-  <text x="320" y="404" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#94531A">abrir no Google Maps</text>
+  <text x="320" y="364" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#4A5570">Rua Humberto Serrano, 995</text>
+  <text x="320" y="390" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#4A5570">Itapoã, Vila Velha — ES</text>
+  <text x="320" y="426" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#94531A">abrir no Google Maps</text>
 </svg>
