@@ -1,8 +1,9 @@
 # Site Dr. Geraldo Andrade do Norte
 
 Peça de apresentação (v1) para aprovação do projeto pelo cliente.
-Página única, HTML e CSS puros, **zero JavaScript**, sem build, sem dependências e
-sem nenhuma requisição externa — as fontes são servidas de `fonts/`.
+Página única, HTML e CSS puros, **zero JavaScript próprio**, sem build e sem
+dependências. As fontes são servidas de `fonts/`; o mapa do consultório é a única
+incorporação externa, carregada do Google Maps.
 
 - Especificação: `docs/superpowers/specs/2026-09-11-site-dr-geraldo-design.md`
 - Plano: `docs/superpowers/plans/2026-09-11-site-dr-geraldo.md`
@@ -62,7 +63,9 @@ não caminho de arquivo:
 
 ## Privacidade
 
-Sem formulário, sem banco, sem cookie, sem analytics. O site não coleta dado nenhum.
+Sem formulário, banco ou analytics próprio. O site não recebe nem armazena dados do
+visitante. O mapa incorporado carrega conteúdo de terceiros; o Google pode processar
+dados técnicos e usar cookies conforme as políticas do Google Maps.
 
 12. As "13 avaliações" estão escritas à mão em três lugares (abertura,
     seção de pacientes e o link do Doctoralia). Se o número mudar, atualizar os três.

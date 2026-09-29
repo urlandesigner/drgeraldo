@@ -61,6 +61,15 @@ else
   falha "img sem alt: $sem_alt"
 fi
 
+# --- Mapa incorporado ---
+if grep -q 'src="https://www.google.com/maps/embed' index.html &&
+   grep -q '<iframe' index.html &&
+   grep -q 'title="Mapa do Instituto Médico Itapoã' index.html; then
+  ok "Google Maps incorporado com título acessível"
+else
+  falha "incorporação acessível do Google Maps não encontrada"
+fi
+
 # --- Metadados ---
 for meta in '<title>' 'name="description"' 'property="og:title"' 'property="og:description"' 'property="og:image"' 'application/ld+json'; do
   if grep -q "$meta" index.html; then
@@ -70,18 +79,14 @@ for meta in '<title>' 'name="description"' 'property="og:title"' 'property="og:d
   fi
 done
 
-# --- Pendências continuam marcadas ---
-# O piso acompanha o que o cliente já respondeu: ele existe para pegar
-# remoção acidental, não para travar pendência resolvida de verdade.
-# 7 -> 6 quando o horário de atendimento foi confirmado (seg a sex, 8h-18h).
-# 6 -> 5 quando o endereço foi completado e o cliente dispensou a sala.
-# Segue 6: o endereço foi confirmado (R. Humberto Serrano, 995), mas a sala
-# entrou no lugar dele. Vira 5 quando a sala for confirmada.
+# --- Nenhuma pendência exposta ao público ---
+# As informações ainda não confirmadas continuam registradas no README,
+# mas não devem aparecer na página publicada.
 pend=$(grep -c 'class="pendente"' index.html)
-if [ "$pend" -ge 5 ]; then
-  ok "pendências marcadas: $pend"
+if [ "$pend" -eq 0 ]; then
+  ok "nenhuma pendência exposta ao público"
 else
-  falha "só $pend pendências marcadas, esperado no mínimo 5"
+  falha "pendências expostas ao público: $pend"
 fi
 
 # --- Um único h1 ---
