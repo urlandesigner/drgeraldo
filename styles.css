@@ -258,8 +258,14 @@ main section > .container > h2,
   color: var(--papel);
   padding-block: clamp(3.5rem, 8vw, 6rem);
   /* O recorte precisa vazar para fora da seção, e a abertura precisa ficar
-     acima da seção seguinte para o vazamento aparecer. */
-  overflow: visible;
+     acima da seção seguinte para o vazamento aparecer.
+     Só que `visible` libera o eixo horizontal junto, e o arco de trás
+     avança ~29px além da foto: em telas de 885 a 1100px isso virava
+     rolagem lateral na página inteira. `clip` no X resolve sem tocar no
+     Y — `hidden` não serviria, porque forçaria o eixo vertical a `auto`
+     e mataria justamente o vazamento. */
+  overflow-x: clip;
+  overflow-y: visible;
   z-index: 2;
 }
 /* Grade de fios, quase imperceptível: dá material ao fundo escuro. */
@@ -363,13 +369,19 @@ main section > .container > h2,
 .hero__prova figcaption a { color: var(--ocre-texto); }
 .hero__prova figcaption a:hover { color: var(--tinta); }
 @media (min-width: 900px) {
-  /* Canto inferior esquerdo da foto: encosta no jaleco, longe do rosto.
+  /* Canto inferior direito da foto: encosta no jaleco, longe do rosto.
      Antes ficava a 52% da altura — no meio do peito dele. */
   .hero__prova {
     position: absolute; z-index: 3;
-    inset-inline-start: -21%; bottom: 4%;
+    inset-inline-end: 0; bottom: 4%;
     margin: 0; max-width: 17.5rem;
   }
+}
+/* Só a partir daqui a margem da página comporta o card avançando para fora
+   da foto. Abaixo de ~1250px ele estouraria a direita da tela; do lado
+   esquerdo isso nunca aparecia, porque ele avançava sobre o texto. */
+@media (min-width: 1250px) {
+  .hero__prova { inset-inline-end: -21%; }
 }
 
 
