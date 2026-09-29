@@ -29,8 +29,10 @@ não caminho de arquivo:
 
 ## Pendências antes de publicar
 
-1. Fotos profissionais do médico — o retrato da abertura é o único do site.
-   Se houver uma segunda foto, ela cabe na seção "Sobre".
+1. ~~Retrato da abertura~~ — feito, a partir de `img/drgeraldo.png`.
+   Falta: autorização de uso da imagem, e o logo do IMI aparece no bolso do
+   jaleco (ver item de autorização das cores do IMI). Se houver uma segunda
+   foto, ela cabe na seção "Sobre".
 2. Bio e formação (faculdade, ano, residência, sociedades)
 3. Confirmação de RQE — sem ele, o site não pode chamá-lo de endocrinologista.
    Dois pontos dependem disso: a linha "Atuação em endocrinologia e metabologia"
@@ -51,3 +53,6 @@ Sem formulário, sem banco, sem cookie, sem analytics. O site não coleta dado n
 
 12. As "13 avaliações" estão escritas à mão em três lugares (abertura,
     seção de pacientes e o link do Doctoralia). Se o número mudar, atualizar os três.
+
+13. `img/og-cover.png` ainda é a arte gerada como provisória. Com a foto real
+    disponível, vale refazer a imagem de compartilhamento a partir dela.

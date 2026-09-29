@@ -77,9 +77,17 @@
       </div>
 
       <figure class="hero__retrato">
-        <img src="img/dr-geraldo.svg"
-             alt="Retrato do Dr. Geraldo Andrade do Norte"
-             width="800" height="1000">
+        <picture>
+          <source type="image/webp"
+                  srcset="img/dr-geraldo-560.webp 560w, img/dr-geraldo-720.webp 720w, img/dr-geraldo-900.webp 900w"
+                  sizes="(min-width: 1200px) 470px, (min-width: 900px) 40vw, calc(100vw - 2.5rem)">
+          <img src="img/dr-geraldo-900.jpg"
+               srcset="img/dr-geraldo-560.jpg 560w, img/dr-geraldo-720.jpg 720w, img/dr-geraldo-900.jpg 900w"
+               sizes="(min-width: 1200px) 470px, (min-width: 900px) 40vw, calc(100vw - 2.5rem)"
+               alt="Dr. Geraldo Andrade do Norte sentado à mesa do consultório, de jaleco branco e estetoscópio"
+               width="900" height="1125"
+               fetchpriority="high" decoding="async">
+        </picture>
       </figure>
       </div>
 

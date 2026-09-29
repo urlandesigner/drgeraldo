@@ -283,7 +283,7 @@ main section > .container > h2,
 /* No celular o retrato inteiro empurrava a abertura para 1192px — uma tela
    e meia antes do primeiro conteudo. Recortado, cabe. */
 @media (max-width: 899px) {
-  .hero__retrato img { aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 38%; }
+  .hero__retrato img { aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 20%; }
 }
 
 .hero h1 { color: var(--papel); max-width: none; margin-bottom: var(--e4); }
