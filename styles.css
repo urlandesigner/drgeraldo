@@ -147,7 +147,7 @@ a:hover { color: var(--tinta); }
 img { max-width: 100%; height: auto; display: block; }
 
 /* Etiqueta em versalete — usada em vários lugares */
-.hero__selo, .depoimento footer, .consultorio__grid p strong, .marca small, .nav__links a {
+.depoimento footer, .consultorio__grid p strong, .marca small, .nav__links a {
   font-size: .72rem;
   letter-spacing: .15em;
   text-transform: uppercase;
@@ -256,7 +256,7 @@ main section > .container > h2,
 .hero {
   background: var(--tinta);
   color: var(--papel);
-  padding-block: clamp(3.5rem, 8vw, 7rem) clamp(4rem, 8vw, 7rem);
+  padding-block: clamp(3.5rem, 8vw, 6rem);
   /* O recorte precisa vazar para fora da seção, e a abertura precisa ficar
      acima da seção seguinte para o vazamento aparecer. */
   overflow: visible;
@@ -274,13 +274,29 @@ main section > .container > h2,
   pointer-events: none;
 }
 .hero .container { position: relative; z-index: 1; }
+@media (min-width: 900px) {
+  /* Altura controlada e conteúdo centrado. Antes a altura era ditada pela
+     coluna de texto e a foto ficava ancorada no rodapé — quanto mais alta a
+     coluna, mais tinta vazia nascia acima dela. */
+  .hero {
+    display: grid;
+    align-content: center;
+    min-height: min(46rem, calc(100svh - var(--nav-h)));
+  }
+}
 
 /* Texto à esquerda, mídia à direita. A ficha, a seta e o selo vivem DENTRO
    da coluna de texto: fora dela ocupavam a largura inteira e o filete
    cortava a foto ao meio. */
 .hero__wrap { display: grid; gap: var(--e6); }
 @media (min-width: 900px) {
-  .hero__wrap { grid-template-columns: minmax(0, 48%); position: relative; }
+  .hero__wrap {
+    /* fr, não %: com porcentagem as duas colunas mais o vão passam de 100%
+       e a grade estoura. */
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+    align-items: center;
+    column-gap: var(--e5);
+  }
 }
 
 .hero__midia { position: relative; }
@@ -307,24 +323,19 @@ main section > .container > h2,
   /* O recorte termina numa aresta reta nos antebraços. Vazando para o
      papel, aquilo lia como membro decepado; dissolvido, lê como sangria. */
   .hero__retrato img {
-    -webkit-mask-image: linear-gradient(to bottom, #000 76%, transparent 97%);
-    mask-image: linear-gradient(to bottom, #000 76%, transparent 97%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 88%, transparent 99.5%);
+    mask-image: linear-gradient(to bottom, #000 88%, transparent 99.5%);
   }
 }
 @media (min-width: 900px) {
   /* A mídia inteira é ancorada no canto; a foto e a prova se posicionam
      dentro dela, e não em relação ao container. */
-  .hero__midia {
-    position: absolute;
-    inset-inline-end: -2%;
-    bottom: -8.5rem;
-    /* 590 em vez de 620: com a foto mais larga, o braço dele chegava a 5px
-       do filete da ficha (medido pelo alfa da imagem, não pela caixa). */
-    width: min(48vw, 590px);
-    z-index: 1;
-  }
+  /* Em margem, 50% resolve contra a célula da grade e não contra a página:
+     `calc(50% - 50vw)` dava -459px e estourava 431px para fora da tela.
+     A coluna larga já dá presença ao recorte, sem sangria lateral. */
+  .hero__midia { align-self: center; }
   .hero__retrato { width: 100%; margin: 0; }
-  .hero__retrato::before { inset: 3% -10% -22% -10%; }
+  .hero__retrato::before { inset: 2% -6% -14% -6%; }
 }
 
 /* Prova flutuante sobre a foto. No lugar das métricas da referência
@@ -347,31 +358,20 @@ main section > .container > h2,
 }
 .hero__prova figcaption {
   font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
-  font-weight: 700; color: var(--ocre-texto);
+  font-weight: 700; color: var(--ocre-texto); line-height: 1.9;
 }
+.hero__prova figcaption a { color: var(--ocre-texto); }
+.hero__prova figcaption a:hover { color: var(--tinta); }
 @media (min-width: 900px) {
   /* Canto inferior esquerdo da foto: encosta no jaleco, longe do rosto.
      Antes ficava a 52% da altura — no meio do peito dele. */
   .hero__prova {
     position: absolute; z-index: 3;
-    inset-inline-start: -16%; bottom: 7%;
+    inset-inline-start: -21%; bottom: 4%;
     margin: 0; max-width: 17.5rem;
   }
 }
 
-/* Seta de continuação */
-.hero__desce {
-  display: inline-grid; place-items: center;
-  width: 2.9rem; height: 2.9rem; margin-top: var(--e5);
-  border: 1px solid rgba(201, 206, 220, .35);
-  border-radius: 50%;
-  color: var(--sobre-tinta);
-  transition: color .2s, border-color .2s, transform .2s;
-}
-.hero__desce:hover { color: var(--ocre); border-color: var(--ocre); transform: translateY(3px); }
-.hero__desce:focus-visible { outline-color: var(--papel); }
-/* No celular a seta e redundante — ninguem precisa de convite para rolar. */
-@media (max-width: 899px) { .hero__desce { display: none; } }
 
 .hero h1 { color: var(--papel); max-width: none; margin-bottom: var(--e4); }
 /* A palavra-tese do site inteiro, no acento. */
@@ -409,9 +409,6 @@ main section > .container > h2,
 }
 .ficha li:first-child::before { display: none; }
 
-.hero__selo { margin: var(--e3) 0 0; color: var(--sobre-tinta); }
-.hero__selo a { color: var(--sobre-tinta); text-decoration-color: rgba(201,206,220,.45); }
-.hero__selo a:hover { color: var(--ocre); }
 
 @media (min-width: 900px) { .hero h1 { font-size: clamp(2.9rem, 4.4vw, 4.4rem); } }
 
@@ -688,14 +685,14 @@ main section > .container > h2,
 /* ---------- Entrada da página ---------------------------------------------------- */
 
 @media (prefers-reduced-motion: no-preference) {
-  .hero h1, .hero__sub, .hero .cta, .ficha, .hero__selo {
+  .hero h1, .hero__sub, .hero .cta, .ficha, .hero__prova {
     animation: sobe .85s cubic-bezier(.2,.75,.2,1) backwards;
   }
   .hero h1    { animation-delay: .06s; }
   .hero__sub  { animation-delay: .18s; }
   .hero .cta  { animation-delay: .28s; }
   .ficha      { animation-delay: .38s; }
-  .hero__selo { animation-delay: .46s; }
+  .hero__prova { animation-delay: .46s; }
 }
 @keyframes sobe { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 
@@ -716,7 +713,7 @@ main section > .container > h2,
   .cta--nav { padding-block: .85rem; }
   .marca { display: inline-block; padding-block: .35rem; }
   /* Links dentro de paragrafo: a caixa de acerto cresce sem mexer na linha. */
-  .hero__selo a, .rodape a, .pacientes .container > p + a,
+  .hero__prova a, .rodape a, .pacientes .container > p + a,
   .pacientes a[href*="doctoralia"] { padding-block: .55rem; }
 }
 
