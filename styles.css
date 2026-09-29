@@ -256,7 +256,7 @@ main section > .container > h2,
 .hero {
   background: var(--tinta);
   color: var(--papel);
-  padding-block: clamp(4.5rem, 11vw, 9.5rem) clamp(4rem, 8vw, 7rem);
+  padding-block: clamp(3.5rem, 8vw, 7rem) clamp(4rem, 8vw, 7rem);
   /* O recorte precisa vazar para fora da seção, e a abertura precisa ficar
      acima da seção seguinte para o vazamento aparecer. */
   overflow: visible;
@@ -275,20 +275,22 @@ main section > .container > h2,
 }
 .hero .container { position: relative; z-index: 1; }
 
-/* Texto a esquerda, retrato a direita. A ficha e o selo ficam fora do
-   .hero__wrap para atravessarem as duas colunas, como faixa de masthead. */
+/* Texto à esquerda, mídia à direita. A ficha, a seta e o selo vivem DENTRO
+   da coluna de texto: fora dela ocupavam a largura inteira e o filete
+   cortava a foto ao meio. */
 .hero__wrap { display: grid; gap: var(--e6); }
 @media (min-width: 900px) {
-  .hero__wrap { grid-template-columns: minmax(0, 56%); }
+  .hero__wrap { grid-template-columns: minmax(0, 48%); position: relative; }
 }
 
+.hero__midia { position: relative; }
 .hero__retrato { margin: 0 auto; position: relative; width: min(78%, 22rem); }
 /* Arco vazado atrás dele. A referência usava losangos; o arco mantém a
    linguagem que já existe no site. */
 .hero__retrato::before {
   content: "";
   position: absolute;
-  inset: 3% 0 -26% 0;
+  inset: 3% 0 -22% 0;
   border: 2px solid rgba(200, 134, 58, .42);
   border-radius: var(--arco);
   /* Sem isso a base do arco aparece solta dentro do papel, parecendo
@@ -305,21 +307,24 @@ main section > .container > h2,
   /* O recorte termina numa aresta reta nos antebraços. Vazando para o
      papel, aquilo lia como membro decepado; dissolvido, lê como sangria. */
   .hero__retrato img {
-    -webkit-mask-image: linear-gradient(to bottom, #000 74%, transparent 97%);
-    mask-image: linear-gradient(to bottom, #000 74%, transparent 97%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 76%, transparent 97%);
+    mask-image: linear-gradient(to bottom, #000 76%, transparent 97%);
   }
 }
 @media (min-width: 900px) {
-  .hero__retrato { width: auto; margin: 0; }
-  .hero__retrato::before { inset: 3% -10% -26% -10%; }
-  /* Ancorado no canto e vazando para baixo: é o recorte que quebra a caixa. */
-  .hero__retrato {
+  /* A mídia inteira é ancorada no canto; a foto e a prova se posicionam
+     dentro dela, e não em relação ao container. */
+  .hero__midia {
     position: absolute;
-    inset-inline-end: -3%;
-    bottom: -10.5rem;
-    width: min(48vw, 580px);
+    inset-inline-end: -2%;
+    bottom: -8.5rem;
+    /* 590 em vez de 620: com a foto mais larga, o braço dele chegava a 5px
+       do filete da ficha (medido pelo alfa da imagem, não pela caixa). */
+    width: min(48vw, 590px);
     z-index: 1;
   }
+  .hero__retrato { width: 100%; margin: 0; }
+  .hero__retrato::before { inset: 3% -10% -22% -10%; }
 }
 
 /* Prova flutuante sobre a foto. No lugar das métricas da referência
@@ -345,10 +350,12 @@ main section > .container > h2,
   font-weight: 700; color: var(--ocre-texto);
 }
 @media (min-width: 900px) {
+  /* Canto inferior esquerdo da foto: encosta no jaleco, longe do rosto.
+     Antes ficava a 52% da altura — no meio do peito dele. */
   .hero__prova {
     position: absolute; z-index: 3;
-    inset-inline-start: 38%; bottom: -1rem;
-    margin: 0; max-width: 19rem;
+    inset-inline-start: -16%; bottom: 7%;
+    margin: 0; max-width: 17.5rem;
   }
 }
 
