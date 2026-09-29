@@ -267,17 +267,46 @@ main section > .container > h2,
   overflow-x: clip;
   overflow-y: visible;
   z-index: 2;
-}
-/* Grade de fios, quase imperceptível: dá material ao fundo escuro. */
-.hero::before {
-  content: "";
-  position: absolute; inset: 0;
+  /* O banner é claro (parede creme, mármore, jaleco branco) e o texto é
+     claro. Sem véu, nada se lê. O véu é horizontal: tinta cheia onde o
+     texto vive, transparente onde ele aparece na foto. */
+  background-color: var(--tinta);
+  background-repeat: no-repeat;
+  background-position: 78% center;
+  background-size: cover;
   background-image:
-    linear-gradient(rgba(201,206,220,.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201,206,220,.07) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(120% 90% at 78% 15%, #000 15%, transparent 72%);
-  pointer-events: none;
+    linear-gradient(to right,
+      rgb(16, 26, 51) 0%,
+      rgba(16, 26, 51, .985) 30%,
+      rgba(16, 26, 51, .93) 44%,
+      rgba(16, 26, 51, .66) 60%,
+      rgba(16, 26, 51, .28) 76%,
+      rgba(16, 26, 51, .12) 100%),
+    image-set(url('img/banner-1280.webp') type('image/webp') 1x,
+              url('img/banner-1920.webp') type('image/webp') 1.6x,
+              url('img/banner-1280.jpg') type('image/jpeg') 1x,
+              url('img/banner-1920.jpg') type('image/jpeg') 1.6x);
+}
+/* No celular a coluna é estreita e a seção é alta: `cover` daria um zoom
+   enorme. O recorte vertical entra embaixo e o véu desce de cima. */
+@media (max-width: 899px) {
+  .hero {
+    background-size: 100% 100%, 100% auto;
+    background-image:
+      linear-gradient(to bottom,
+        rgb(16, 26, 51) 0%,
+        rgb(16, 26, 51) 52%,
+        rgba(16, 26, 51, .82) 64%,
+        rgba(16, 26, 51, .35) 78%,
+        rgba(16, 26, 51, .12) 100%),
+      image-set(url('img/banner-movel.webp') type('image/webp'),
+                url('img/banner-movel.jpg') type('image/jpeg'));
+    background-repeat: no-repeat, no-repeat;
+    background-position: center, center bottom;
+    /* A faixa da foto mede 83vw de altura (o recorte é 900x750 na largura
+       da tela). Sem respiro embaixo, o cartão caía sobre o rosto dele. */
+    padding-bottom: 74vw;
+  }
 }
 .hero .container { position: relative; z-index: 1; }
 @media (min-width: 900px) {
@@ -291,64 +320,19 @@ main section > .container > h2,
   }
 }
 
-/* Texto à esquerda, mídia à direita. A ficha, a seta e o selo vivem DENTRO
-   da coluna de texto: fora dela ocupavam a largura inteira e o filete
-   cortava a foto ao meio. */
+/* Coluna única: quem mostra o médico agora é o fundo da seção. */
 .hero__wrap { display: grid; gap: var(--e6); }
 @media (min-width: 900px) {
-  .hero__wrap {
-    /* fr, não %: com porcentagem as duas colunas mais o vão passam de 100%
-       e a grade estoura. */
-    grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
-    align-items: center;
-    column-gap: var(--e5);
-  }
+  /* Coluna única e estreita: o texto tem de caber onde o véu é opaco.
+     Além de ~52% ele invade a área em que a foto aparece. */
+  .hero__wrap { grid-template-columns: minmax(0, 52%); }
 }
 
-.hero__midia { position: relative; }
-.hero__retrato { margin: 0 auto; position: relative; width: min(78%, 22rem); }
-/* Arco vazado atrás dele. A referência usava losangos; o arco mantém a
-   linguagem que já existe no site. */
-.hero__retrato::before {
-  content: "";
-  position: absolute;
-  inset: 3% 0 -22% 0;
-  border: 2px solid rgba(200, 134, 58, .42);
-  border-radius: var(--arco);
-  /* Sem isso a base do arco aparece solta dentro do papel, parecendo
-     sobra de desenho. Dissolvido, resta só a cúpula. */
-  -webkit-mask-image: linear-gradient(to bottom, #000 48%, transparent 84%);
-  mask-image: linear-gradient(to bottom, #000 48%, transparent 84%);
-}
-.hero__retrato img {
-  width: 100%;
-  position: relative; z-index: 1;
-  filter: drop-shadow(0 26px 46px rgba(0, 0, 0, .45));
-}
-@media (min-width: 900px) {
-  /* O recorte termina numa aresta reta nos antebraços. Vazando para o
-     papel, aquilo lia como membro decepado; dissolvido, lê como sangria. */
-  .hero__retrato img {
-    -webkit-mask-image: linear-gradient(to bottom, #000 88%, transparent 99.5%);
-    mask-image: linear-gradient(to bottom, #000 88%, transparent 99.5%);
-  }
-}
-@media (min-width: 900px) {
-  /* A mídia inteira é ancorada no canto; a foto e a prova se posicionam
-     dentro dela, e não em relação ao container. */
-  /* Em margem, 50% resolve contra a célula da grade e não contra a página:
-     `calc(50% - 50vw)` dava -459px e estourava 431px para fora da tela.
-     A coluna larga já dá presença ao recorte, sem sangria lateral. */
-  .hero__midia { align-self: center; }
-  .hero__retrato { width: 100%; margin: 0; }
-  .hero__retrato::before { inset: 2% -6% -14% -6%; }
-}
-
-/* Prova flutuante sobre a foto. No lugar das métricas da referência
-   ("+1.000 pacientes"), uma avaliação real, datada e com a fonte. */
+/* A avaliação, no lugar das métricas da referência ("+1.000 pacientes"):
+   real, datada e com a fonte. */
 .hero__prova {
   margin: var(--e5) 0 0;
-  max-width: 22rem;
+  max-width: 24rem;
   background: var(--papel);
   color: var(--tinta);
   border-radius: var(--r-md);
@@ -368,21 +352,6 @@ main section > .container > h2,
 }
 .hero__prova figcaption a { color: var(--ocre-texto); }
 .hero__prova figcaption a:hover { color: var(--tinta); }
-@media (min-width: 900px) {
-  /* Canto inferior direito da foto: encosta no jaleco, longe do rosto.
-     Antes ficava a 52% da altura — no meio do peito dele. */
-  .hero__prova {
-    position: absolute; z-index: 3;
-    inset-inline-end: 0; bottom: 4%;
-    margin: 0; max-width: 17.5rem;
-  }
-}
-/* Só a partir daqui a margem da página comporta o card avançando para fora
-   da foto. Abaixo de ~1250px ele estouraria a direita da tela; do lado
-   esquerdo isso nunca aparecia, porque ele avançava sobre o texto. */
-@media (min-width: 1250px) {
-  .hero__prova { inset-inline-end: -21%; }
-}
 
 
 .hero h1 { color: var(--papel); max-width: none; margin-bottom: var(--e4); }

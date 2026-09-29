@@ -29,8 +29,9 @@ não caminho de arquivo:
 
 ## Pendências antes de publicar
 
-1. ~~Retrato da abertura~~ — feito, a partir de `img/drgeraldooff.png` (recorte
-   com fundo transparente). A versão com fundo, `img/drgeraldo.png`, ficou sem uso.
+1. ~~Foto da abertura~~ — feito: `img/banner.png` é o fundo da seção.
+   `img/drgeraldo.png` e `img/drgeraldooff.png` ficaram sem uso; mantidos no
+   repositório como originais, fora do deploy pelo `.vercelignore`.
    Falta: autorização de uso da imagem, e o logo do IMI aparece no bolso do
    jaleco (ver item de autorização das cores do IMI). Se houver uma segunda
    foto, ela cabe na seção "Sobre".
