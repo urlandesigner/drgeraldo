@@ -164,7 +164,7 @@ section { padding-block: var(--secao-y); position: relative; }
    o conteudo e nao se repetia igual em lugar nenhum. Agora e a sobrancelha
    do titulo — mesmo desenho, mesma posicao, em todas as secoes. */
 main { counter-reset: secao; }
-main section[id] { counter-increment: secao; }
+main section[id]:not(#incomodo) { counter-increment: secao; }
 
 /* Sobrancelha: numeral + filete, identica acima de todo titulo de secao. */
 main section > .container h2::before,
@@ -179,7 +179,7 @@ main section > .container h2::before,
   font-size: .72rem; font-weight: 700; letter-spacing: .2em;
   color: var(--ocre-texto);
 }
-main section[id] > .container > h2::before,
+main section[id]:not(#incomodo) > .container > h2::before,
 .consultorio__grid > div > h2::before { content: "0" counter(secao); }
 .pacientes h2::before { color: var(--ocre); }
 
@@ -257,7 +257,10 @@ main section > .container > h2,
   background: var(--tinta);
   color: var(--papel);
   padding-block: clamp(4.5rem, 11vw, 9.5rem) clamp(4rem, 8vw, 7rem);
-  overflow: hidden;
+  /* O recorte precisa vazar para fora da seção, e a abertura precisa ficar
+     acima da seção seguinte para o vazamento aparecer. */
+  overflow: visible;
+  z-index: 2;
 }
 /* Grade de fios, quase imperceptível: dá material ao fundo escuro. */
 .hero::before {
@@ -276,29 +279,96 @@ main section > .container > h2,
    .hero__wrap para atravessarem as duas colunas, como faixa de masthead. */
 .hero__wrap { display: grid; gap: var(--e6); }
 @media (min-width: 900px) {
-  .hero__wrap {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
-    align-items: center;
-    column-gap: var(--e7);
-  }
-}
-.hero__retrato {
-  margin: 0;
-  padding: .55rem;
-  border: 1px solid rgba(201, 206, 220, .3);
-  background: rgba(201, 206, 220, .05);
-  border-radius: var(--arco);
-  /* Brilho quente: desfaz a aresta dura da foto contra a tinta. */
-  box-shadow: 0 0 140px -30px rgba(200, 134, 58, .45);
-}
-.hero__retrato img { width: 100%; border-radius: var(--arco); }
-/* No celular o retrato inteiro empurrava a abertura para 1192px — uma tela
-   e meia antes do primeiro conteudo. Recortado, cabe. */
-@media (max-width: 899px) {
-  .hero__retrato img { aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 20%; }
+  .hero__wrap { grid-template-columns: minmax(0, 56%); }
 }
 
+.hero__retrato { margin: 0 auto; position: relative; width: min(78%, 22rem); }
+/* Arco vazado atrás dele. A referência usava losangos; o arco mantém a
+   linguagem que já existe no site. */
+.hero__retrato::before {
+  content: "";
+  position: absolute;
+  inset: 3% 0 -26% 0;
+  border: 2px solid rgba(200, 134, 58, .42);
+  border-radius: var(--arco);
+  /* Sem isso a base do arco aparece solta dentro do papel, parecendo
+     sobra de desenho. Dissolvido, resta só a cúpula. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 48%, transparent 84%);
+  mask-image: linear-gradient(to bottom, #000 48%, transparent 84%);
+}
+.hero__retrato img {
+  width: 100%;
+  position: relative; z-index: 1;
+  filter: drop-shadow(0 26px 46px rgba(0, 0, 0, .45));
+}
+@media (min-width: 900px) {
+  /* O recorte termina numa aresta reta nos antebraços. Vazando para o
+     papel, aquilo lia como membro decepado; dissolvido, lê como sangria. */
+  .hero__retrato img {
+    -webkit-mask-image: linear-gradient(to bottom, #000 74%, transparent 97%);
+    mask-image: linear-gradient(to bottom, #000 74%, transparent 97%);
+  }
+}
+@media (min-width: 900px) {
+  .hero__retrato { width: auto; margin: 0; }
+  .hero__retrato::before { inset: 3% -10% -26% -10%; }
+  /* Ancorado no canto e vazando para baixo: é o recorte que quebra a caixa. */
+  .hero__retrato {
+    position: absolute;
+    inset-inline-end: -3%;
+    bottom: -10.5rem;
+    width: min(48vw, 580px);
+    z-index: 1;
+  }
+}
+
+/* Prova flutuante sobre a foto. No lugar das métricas da referência
+   ("+1.000 pacientes"), uma avaliação real, datada e com a fonte. */
+.hero__prova {
+  margin: var(--e5) 0 0;
+  max-width: 22rem;
+  background: var(--papel);
+  color: var(--tinta);
+  border-radius: var(--r-md);
+  border-inline-start: 4px solid var(--ocre);
+  padding: var(--e4) var(--e4) var(--e3);
+  box-shadow: 0 20px 52px -20px rgba(0, 0, 0, .6);
+}
+.hero__prova blockquote {
+  margin: 0 0 var(--e2);
+  font-family: var(--display);
+  font-variation-settings: "opsz" 48;
+  font-size: 1.12rem; line-height: 1.36;
+}
+.hero__prova figcaption {
+  font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+  font-weight: 700; color: var(--ocre-texto);
+}
+@media (min-width: 900px) {
+  .hero__prova {
+    position: absolute; z-index: 3;
+    inset-inline-start: 38%; bottom: -1rem;
+    margin: 0; max-width: 19rem;
+  }
+}
+
+/* Seta de continuação */
+.hero__desce {
+  display: inline-grid; place-items: center;
+  width: 2.9rem; height: 2.9rem; margin-top: var(--e5);
+  border: 1px solid rgba(201, 206, 220, .35);
+  border-radius: 50%;
+  color: var(--sobre-tinta);
+  transition: color .2s, border-color .2s, transform .2s;
+}
+.hero__desce:hover { color: var(--ocre); border-color: var(--ocre); transform: translateY(3px); }
+.hero__desce:focus-visible { outline-color: var(--papel); }
+/* No celular a seta e redundante — ninguem precisa de convite para rolar. */
+@media (max-width: 899px) { .hero__desce { display: none; } }
+
 .hero h1 { color: var(--papel); max-width: none; margin-bottom: var(--e4); }
+/* A palavra-tese do site inteiro, no acento. */
+.hero h1 em { font-style: normal; color: var(--ocre); }
 .hero h1::before {
   content: "";
   display: block;

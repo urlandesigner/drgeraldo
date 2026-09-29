@@ -29,7 +29,8 @@ não caminho de arquivo:
 
 ## Pendências antes de publicar
 
-1. ~~Retrato da abertura~~ — feito, a partir de `img/drgeraldo.png`.
+1. ~~Retrato da abertura~~ — feito, a partir de `img/drgeraldooff.png` (recorte
+   com fundo transparente). A versão com fundo, `img/drgeraldo.png`, ficou sem uso.
    Falta: autorização de uso da imagem, e o logo do IMI aparece no bolso do
    jaleco (ver item de autorização das cores do IMI). Se houver uma segunda
    foto, ela cabe na seção "Sobre".
@@ -67,3 +68,8 @@ Sem formulário, sem banco, sem cookie, sem analytics. O site não coleta dado n
 
 13. `img/og-cover.png` ainda é a arte gerada como provisória. Com a foto real
     disponível, vale refazer a imagem de compartilhamento a partir dela.
+
+14. A avaliação que aparece na abertura ("Você sai do consultório sem nenhuma
+    dúvida", paciente anônimo, janeiro de 2017) é a mesma já publicada na seção
+    de pacientes. Ela deixa o depoimento muito mais visível, o que aumenta o peso
+    do item 9 — validar com o CRM-ES a reprodução de depoimentos.
