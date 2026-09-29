@@ -75,6 +75,15 @@
   --e6: 3.5rem;
   --e7: clamp(3.5rem, 6vw, 5.5rem);
 
+  /* Geometria. O site era todo retângulo de 3px: cartão, moldura, mapa,
+     botão, e até os marcadores eram quadrados girados 45°. A curva entra
+     como contraponto, não como arredondamento geral — arredondar tudo por
+     igual apagaria o caráter impresso. */
+  --r-sm:   6px;
+  --r-md:   16px;
+  --r-pill: 999px;
+  --arco:   46% 46% 16px 16px / 30% 30% 16px 16px;
+
   /* Sombras quentes, não cinzas — o cinza sobre papel parece sujeira */
   --sombra-baixa: 0 1px 2px rgba(64,44,18,.07), 0 3px 8px -4px rgba(64,44,18,.12);
   --sombra-alta:  0 2px 4px rgba(64,44,18,.06), 0 18px 38px -16px rgba(64,44,18,.28);
@@ -134,7 +143,7 @@ h3 {
 p { margin: 0 0 1.15rem; max-width: var(--medida); }
 a { color: var(--acao); text-decoration-thickness: 1px; text-underline-offset: .22em; }
 a:hover { color: var(--tinta); }
-:focus-visible { outline: 2px solid var(--acao); outline-offset: 4px; border-radius: 1px; }
+:focus-visible { outline: 2px solid var(--acao); outline-offset: 4px; border-radius: var(--r-sm); }
 img { max-width: 100%; height: auto; display: block; }
 
 /* Etiqueta em versalete — usada em vários lugares */
@@ -226,8 +235,8 @@ main section > .container > h2,
   background: var(--azul); color: var(--papel);
   font-weight: 700; font-size: .95rem;
   text-decoration: none;
-  padding: 1rem 1.9rem;
-  border-radius: 3px;
+  padding: 1rem 2.1rem;
+  border-radius: var(--r-pill);
   box-shadow: var(--sombra-baixa);
   transition: background .2s, transform .2s, box-shadow .2s;
   cursor: pointer;
@@ -273,13 +282,16 @@ main section > .container > h2,
     column-gap: var(--e7);
   }
 }
-.hero__retrato { margin: 0; }
-.hero__retrato img {
-  width: 100%;
+.hero__retrato {
+  margin: 0;
   padding: .55rem;
   border: 1px solid rgba(201, 206, 220, .3);
   background: rgba(201, 206, 220, .05);
+  border-radius: var(--arco);
+  /* Brilho quente: desfaz a aresta dura da foto contra a tinta. */
+  box-shadow: 0 0 140px -30px rgba(200, 134, 58, .45);
 }
+.hero__retrato img { width: 100%; border-radius: var(--arco); }
 /* No celular o retrato inteiro empurrava a abertura para 1192px — uma tela
    e meia antes do primeiro conteudo. Recortado, cabe. */
 @media (max-width: 899px) {
@@ -316,7 +328,7 @@ main section > .container > h2,
 }
 .ficha li::before {
   content: ""; position: absolute; inset-inline-start: -1.25rem; top: .62em;
-  width: .3rem; height: .3rem; background: var(--ocre); transform: rotate(45deg);
+  width: .34rem; height: .34rem; background: var(--ocre); border-radius: 50%;
 }
 .ficha li:first-child::before { display: none; }
 
@@ -370,7 +382,7 @@ main section > .container > h2,
 }
 .credenciais li::before {
   content: ""; position: absolute; inset-inline-start: 0; top: 1.55em;
-  width: .45rem; height: .45rem; background: var(--ocre); transform: rotate(45deg);
+  width: .45rem; height: .45rem; background: var(--ocre); border-radius: 50%;
 }
 
 .pendente {
@@ -400,12 +412,17 @@ main section > .container > h2,
 /* Numeral sólido em ocre: âncora visual da sequência. */
 .passo::before {
   content: counter(passo, decimal-leading-zero);
-  position: absolute; inset-inline-start: 0; top: 2rem;
+  position: absolute; inset-inline-start: 0; top: 1.95rem;
+  width: 3.1rem; height: 3.1rem;
+  display: grid; place-items: center;
+  border: 2px solid var(--ocre);
+  border-radius: 50%;
+  background: rgba(200, 134, 58, .12);
   font-family: var(--display);
-  font-variation-settings: "opsz" 144;
-  font-size: 2.9rem; line-height: 1; font-weight: 600;
-  color: var(--ocre);
-  letter-spacing: -.04em;
+  font-variation-settings: "opsz" 48;
+  font-size: 1.12rem; line-height: 1; font-weight: 600;
+  color: var(--ocre-texto);
+  letter-spacing: .02em;
 }
 .passo h3 { margin-bottom: var(--e1); }
 .passo p { margin: 0; color: var(--tinta-suave); }
@@ -418,7 +435,7 @@ main section > .container > h2,
   margin-top: var(--e7);
   background: var(--tinta); color: var(--papel);
   padding: clamp(2.2rem, 4.5vw, 3.75rem);
-  border-radius: 3px;
+  border-radius: var(--r-md);
   border-inline-start: 6px solid var(--ocre);
   box-shadow: var(--sombra-alta);
 }
@@ -446,12 +463,14 @@ main section > .container > h2,
   margin-top: 0;
 }
 .tema {
-  background: var(--papel);
-  border: 1px solid var(--fio);
+  /* Sem contorno nos quatro lados: o cartão se destaca por tom e elevação.
+     Papel mais claro que o fundo, e só o filete de topo em azul. */
+  background: #FDFBF6;
+  border: 1px solid #E8E0D2;
   border-top: 4px solid var(--azul);
-  border-radius: 3px;
+  border-radius: var(--r-md);
   padding: var(--e5) var(--e4);
-  box-shadow: var(--sombra-baixa);
+  box-shadow: var(--sombra-alta);
   transition: transform .25s, box-shadow .25s;
 }
 .tema:hover { transform: translateY(-4px); box-shadow: var(--sombra-alta); }
@@ -513,6 +532,7 @@ main section > .container > h2,
 .consultorio__grid img {
   border: 1px solid var(--fio-forte); padding: .6rem;
   background: var(--papel); box-shadow: var(--sombra-alta);
+  border-radius: var(--r-md);
 }
 .consultorio__grid .cta { margin-top: var(--e2); }
 @media (min-width: 900px) { .consultorio__grid { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); } }
