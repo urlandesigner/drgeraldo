@@ -32,7 +32,10 @@ não caminho de arquivo:
 1. Fotos profissionais do médico — o retrato da abertura é o único do site.
    Se houver uma segunda foto, ela cabe na seção "Sobre".
 2. Bio e formação (faculdade, ano, residência, sociedades)
-3. Confirmação de RQE — sem ele, o site não pode chamá-lo de endocrinologista
+3. Confirmação de RQE — sem ele, o site não pode chamá-lo de endocrinologista.
+   Dois pontos dependem disso: a linha "Atuação em endocrinologia e metabologia"
+   nas credenciais, e o campo `medicalSpecialty` do JSON-LD (removido por ora —
+   os dados estruturados afirmavam a especialidade que o texto visível evita).
 4. Número de WhatsApp correto
 5. Endereço definitivo — conflito entre Doctoralia e a clínica IMI
 6. Horário de atendimento
@@ -45,3 +48,6 @@ não caminho de arquivo:
 ## Privacidade
 
 Sem formulário, sem banco, sem cookie, sem analytics. O site não coleta dado nenhum.
+
+12. As "13 avaliações" estão escritas à mão em três lugares (abertura,
+    seção de pacientes e o link do Doctoralia). Se o número mudar, atualizar os três.
