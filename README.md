@@ -39,9 +39,18 @@ não caminho de arquivo:
    nas credenciais, e o campo `medicalSpecialty` do JSON-LD (removido por ora —
    os dados estruturados afirmavam a especialidade que o texto visível evita).
 4. Número de WhatsApp correto
-5. Endereço — conflito resolvido: é o Instituto Médico Itapoã, em Itapoã,
-   confirmado pelo link do Google Maps enviado pelo cliente
-   (−20.3512209, −40.2880954). Falta só rua, número e sala.
+5. ~~Endereço~~ — Rua Humberto Serrano, 995 · Itapoã, Vila Velha — ES · 29101-463.
+   Três fontes batem na rua: as coordenadas do link do Maps (−20.3512209,
+   −40.2880954), a ficha do próprio IMI no Doctoralia e os Correios. O número
+   995 vem do Doctoralia e do Waze — não foi confirmado pelo cliente.
+   Dois detalhes menores em aberto:
+   - **Falta a sala.** É clínica de várias especialidades; sem a sala o paciente
+     chega no prédio e não na porta. Única pendência que sobrou do endereço.
+   - CEP: a ficha do IMI diz 29101-463; as coordenadas caem no trecho 29101-460.
+     Mesma rua, segmentos vizinhos. Ninguém navega por CEP, mas vale conferir.
+   - Bairro: os Correios registram a rua como "Praia da Costa"; o Maps e o
+     Doctoralia dizem Itapuã/Itapoã. Mantive Itapoã, que é como a clínica se
+     chama e como o paciente vai se referir ao lugar.
 6. ~~Horário de atendimento~~ — confirmado: segunda a sexta, das 8h às 18h
 7. Confirmar se há atendimento por telemedicina
 8. Autorização para usar as cores do IMI
