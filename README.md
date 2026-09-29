@@ -39,7 +39,9 @@ não caminho de arquivo:
    nas credenciais, e o campo `medicalSpecialty` do JSON-LD (removido por ora —
    os dados estruturados afirmavam a especialidade que o texto visível evita).
 4. Número de WhatsApp correto
-5. Endereço definitivo — conflito entre Doctoralia e a clínica IMI
+5. Endereço — conflito resolvido: é o Instituto Médico Itapoã, em Itapoã,
+   confirmado pelo link do Google Maps enviado pelo cliente
+   (−20.3512209, −40.2880954). Falta só rua, número e sala.
 6. Horário de atendimento
 7. Confirmar se há atendimento por telemedicina
 8. Autorização para usar as cores do IMI
