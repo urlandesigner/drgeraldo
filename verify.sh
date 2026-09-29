@@ -71,11 +71,14 @@ for meta in '<title>' 'name="description"' 'property="og:title"' 'property="og:d
 done
 
 # --- Pendências continuam marcadas ---
+# O piso acompanha o que o cliente já respondeu: ele existe para pegar
+# remoção acidental, não para travar pendência resolvida de verdade.
+# 7 -> 6 quando o horário de atendimento foi confirmado (seg a sex, 8h-18h).
 pend=$(grep -c 'class="pendente"' index.html)
-if [ "$pend" -ge 7 ]; then
+if [ "$pend" -ge 6 ]; then
   ok "pendências marcadas: $pend"
 else
-  falha "só $pend pendências marcadas, esperado no mínimo 7"
+  falha "só $pend pendências marcadas, esperado no mínimo 6"
 fi
 
 # --- Um único h1 ---

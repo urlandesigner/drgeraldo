@@ -42,7 +42,7 @@ não caminho de arquivo:
 5. Endereço — conflito resolvido: é o Instituto Médico Itapoã, em Itapoã,
    confirmado pelo link do Google Maps enviado pelo cliente
    (−20.3512209, −40.2880954). Falta só rua, número e sala.
-6. Horário de atendimento
+6. ~~Horário de atendimento~~ — confirmado: segunda a sexta, das 8h às 18h
 7. Confirmar se há atendimento por telemedicina
 8. Autorização para usar as cores do IMI
 9. Validar com o CRM-ES a reprodução de depoimentos de pacientes
