@@ -8,7 +8,7 @@ incorporação externa, carregada do Google Maps.
 - Especificação: `docs/superpowers/specs/2026-09-11-site-dr-geraldo-design.md`
 - Plano: `docs/superpowers/plans/2026-09-11-site-dr-geraldo.md`
 
-## Rodar local
+11. `og:image` já usa URL absoluta em `drgeraldo.vercel.app`. Se o domínio próprio for configurado, trocar `og:url`, `og:image` e `twitter:image`.
 
     python3 -m http.server 8770 --bind 127.0.0.1
 
