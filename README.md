@@ -70,8 +70,9 @@ dados técnicos e usar cookies conforme as políticas do Google Maps.
 12. As "13 avaliações" estão escritas à mão em três lugares (abertura,
     seção de pacientes e o link do Doctoralia). Se o número mudar, atualizar os três.
 
-13. `img/og-cover.png` ainda é a arte gerada como provisória. Com a foto real
-    disponível, vale refazer a imagem de compartilhamento a partir dela.
+13. `img/og-hero.jpg` é a captura da abertura (hero) em 1200×630. Se o texto ou a
+    foto da abertura mudarem, refazer a captura com um nome de arquivo novo: o
+    Vercel serve `/img/*` como `immutable` e o WhatsApp guarda o preview pela URL.
 
 14. A avaliação que aparece na abertura ("Você sai do consultório sem nenhuma
     dúvida", paciente anônimo, janeiro de 2017) é a mesma já publicada na seção
